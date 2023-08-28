@@ -1,0 +1,224 @@
+<form action="#">
+  <div class="dx-fieldset">
+    <div class="level-filter">
+      <div class="dx-field">
+        <div class="dx-field-label filter-label">
+          Уровень
+        </div>
+      </div>
+      <div class="dx-field filter">
+        <div class="dx-field-label filter-label">
+          От:
+        </div>
+        <div class="dx-field-value">
+          <dx-text-box
+            [inputAttr]="{ 'aria-label': 'Name' }"
+            [showClearButton]="true"
+            [formControl]="levelDown"
+            width="80px">
+            <dx-validator>
+              <dxi-validation-rule
+                type="numeric"
+                message="Только числа.">
+              </dxi-validation-rule>
+            </dx-validator>
+          </dx-text-box>
+        </div>
+      </div>
+      <div class="dx-field filter">
+        <div class="dx-field-label filter-label">
+          До:
+        </div>
+        <div class="dx-field-value">
+          <dx-text-box
+            [inputAttr]="{ 'aria-label': 'Name' }"
+            [showClearButton]="true"
+            [formControl]="levelUp"
+            width="80px">
+            <dx-validator>
+              <dxi-validation-rule
+                type="numeric"
+                message="Только числа.">
+              </dxi-validation-rule>
+            </dx-validator>
+          </dx-text-box>
+        </div>
+      </div>
+    </div>
+    <div class="dx-field">
+      <div class="dx-field-label">
+        Способности
+      </div>
+      <div class="dx-field-value">
+        <dx-tag-box
+          [dataSource]="skills$ | async"
+          valueExpr="name"
+          displayExpr="name"
+          [formControl]="heroSkills">
+          <dx-validator>
+            <dxi-validation-rule
+              type="stringLength"
+              [min]="2"
+              message="You must add a skill (skills) of hero. If you dont find your skill, add one in skills form."
+            ></dxi-validation-rule>
+          </dx-validator>
+        </dx-tag-box>
+      </div>
+    </div>
+    <div class="dx-field">
+      <div class="dx-field-label">
+        Поиск по имени:
+      </div>
+      <div class="dx-field-value">
+        <dx-text-box
+          [inputAttr]="{ 'aria-label': 'Name' }"
+          [showClearButton]="true"
+          [formControl]="heroName">
+        </dx-text-box>
+      </div>
+    </div>
+    <div class="dx-field">
+      <div class="dx-field-label"
+           style="width: 350px">
+        Сортировка по возрастанию уровня:
+      </div>
+      <div class="dx-field-value">
+        <dx-check-box
+          [value]="true"
+          [elementAttr]="{ 'aria-label': 'Checked' }"
+          [formControl]="heroSort">
+        ></dx-check-box>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+<dx-accordion class="show-heroes"
+  [dataSource]="heroes$ | async | filterHeroes: heroSort.value : levelDown.value : levelUp.value : heroName.value : heroSkills.value "
+  [collapsible]="true"
+  itemTemplate="item"
+  itemTitleTemplate="title">
+  <div  *dxTemplate="let hero of 'title'">
+    <div class="hero-title">
+      <div>Уровень: {{hero.level}}</div>
+      <div>{{hero[HeroLabels.NAME]}}</div>
+    </div>
+  </div>
+  <div class="hero-info" *dxTemplate="let hero of 'item'">
+    <div class="hero-info-card">
+      <div>{{hero[HeroLabels.POWER]}}</div>
+      <div class="skills">
+        <div *ngFor = 'let skill of hero[HeroLabels.SKILLS]'>
+          {{skill}}
+        </div>
+      </div>
+    </div>
+
+    <dx-button
+      class="button-info"
+      text="Редактировать"
+      (onClick)="togglePopup(hero, hero[HeroLabels.ID])"
+    >
+    </dx-button>
+    <dx-popup id="popup"
+              [(visible)]="isPopupVisible"
+              [hideOnOutsideClick]="true"
+              [height]="500"
+              [width]="500"
+              title="Редактирование персонажа {{hero[HeroLabels.NAME]}}">
+      <form action="#">
+        <div class="dx-field">
+          <div class="dx-field-label">Имя</div>
+          <div class="dx-field-value">
+            <dx-text-box
+              [inputAttr]="{ 'aria-label': 'Name' }"
+              [showClearButton]="true"
+              [formControl]="changeName"
+              text="{{hero[HeroLabels.NAME]}}">
+
+              <dx-validator>
+                <dxi-validation-rule
+                  type="stringLength"
+                  [min]="2"
+                  message="Name must have at least 2 symbols"
+                ></dxi-validation-rule>
+              </dx-validator>
+            </dx-text-box>
+          </div>
+        </div>
+        <div class="dx-field">
+          <div class="dx-field-label">Сила</div>
+          <div class="dx-field-value">
+            <dx-text-box
+              [inputAttr]="{ 'aria-label': 'Name' }"
+              [showClearButton]="true"
+              [formControl]="changePower"
+              text="{{hero[HeroLabels.POWER]}}">
+              <dx-validator>
+                <dxi-validation-rule
+                  type="stringLength"
+                  [min]="1"
+                  message="You must write a power of hero"
+                ></dxi-validation-rule>
+              </dx-validator>
+            </dx-text-box>
+          </div>
+        </div>
+        <div class="dx-field">
+          <div class="dx-field-label">Способности {{hero[HeroLabels.SKILLS]}}</div>
+          <div class="dx-field-value">
+            <dx-tag-box
+              [dataSource]="skills$ | async"
+              valueExpr="name"
+              displayExpr="name"
+              [formControl]="changeSkills"
+              [value]="currentSkills"
+              [showSelectionControls]="true">
+              <dx-validator>
+                <dxi-validation-rule
+                  type="stringLength"
+                  [min]="2"
+                  message="You must add a skill (skills) of hero. If you dont find your skill, add one in skills form."
+                ></dxi-validation-rule>
+              </dx-validator>
+            </dx-tag-box>
+          </div>
+        </div>
+        <div class="dx-field">
+          <div class="dx-field-label">Начальный уровень</div>
+          <div class="dx-field-value">
+            <dx-text-box
+              [inputAttr]="{ 'aria-label': 'Name' }"
+              [showClearButton]="true"
+              [formControl]="changeLevel"
+              text="{{hero[HeroLabels.LEVEL]}}">
+              <dx-validator>
+                <dxi-validation-rule
+                  type="numeric"
+                  message="Only numbers."
+                ></dxi-validation-rule>
+              </dx-validator>
+            </dx-text-box>
+          </div>
+        </div>
+        <dx-button
+          text="Редактировать героя"
+          type="submit"
+          (click)="changeHero(hero[HeroLabels.ID], hero)">
+        </dx-button>
+      </form>
+    </dx-popup>
+
+  </div>
+</dx-accordion>

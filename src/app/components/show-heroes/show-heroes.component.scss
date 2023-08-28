@@ -1,0 +1,57 @@
+$bg-button-color: #031369;
+$button-color: white;
+$bg-color: #d3d3d3;
+.level-filter{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.filter-label{
+  width: 100px;
+  height: 30px;
+}
+.dx-field{
+  display: flex;
+  flex-direction: row;
+}
+.filter{
+  display: flex;
+  flex-direction: row;
+}
+.show-heroes{
+  margin-top: 100px;
+}
+.hero-title {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+}
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  min-height: 50px;
+  width: 350px;
+  div {
+    margin-right: 5px;
+    margin-top: 5px;
+    height: 25px;
+    padding: 3px;
+    background-color: $bg-color;
+  }
+}
+.hero-info{
+  display: flex;
+  justify-content: space-between;
+  min-height: 70px;
+  dx-button{
+    width: 150px;
+    height: 40px;
+    background-color: $bg-button-color;
+    color: $button-color;
+  }
+}
+.hero-info-card{
+  display: flex;
+  flex-direction: column;
+}

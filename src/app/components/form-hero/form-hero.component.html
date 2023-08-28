@@ -1,0 +1,110 @@
+<form action="#" class="form-new-hero">
+    <div class="dx-field">
+      <div class="dx-field-label">
+        Имя
+      </div>
+      <div class="dx-field-value">
+        <dx-text-box
+          [inputAttr]="{ 'aria-label': 'Name' }"
+          [showClearButton]="true"
+          [formControl]="heroName">
+          <dx-validator>
+            <dxi-validation-rule
+              type="stringLength"
+              [min]="2"
+              message="Name must have at least 2 symbols"
+            ></dxi-validation-rule>
+          </dx-validator>
+        </dx-text-box>
+      </div>
+    </div>
+    <div class="dx-field">
+      <div class="dx-field-label">
+        Сила
+      </div>
+      <div class="dx-field-value">
+        <dx-text-box
+          [inputAttr]="{ 'aria-label': 'Name' }"
+          [showClearButton]="true"
+          [formControl]="heroPower">
+          <dx-validator>
+            <dxi-validation-rule
+              type="stringLength"
+              [min]="1"
+              message="You must write a power of hero"
+            ></dxi-validation-rule>
+          </dx-validator>
+        </dx-text-box>
+      </div>
+    </div>
+    <div class="dx-field">
+      <div class="dx-field-label">
+        Способности
+      </div>
+      <div class="dx-field-value">
+        <dx-tag-box
+          [dataSource]="skills$ | async"
+          valueExpr="name"
+          displayExpr="name"
+          [formControl]="heroSkills">
+          <dx-validator>
+            <dxi-validation-rule
+              type="stringLength"
+              [min]="2"
+              message="You must add a skill (skills) of hero. If you dont find your skill, add one in skills form."
+            ></dxi-validation-rule>
+          </dx-validator>
+        </dx-tag-box>
+      </div>
+    </div>
+    <div class="dx-field">
+      <div class="dx-field-label">
+        Начальный уровень
+      </div>
+      <div class="dx-field-value">
+        <dx-text-box
+          [inputAttr]="{ 'aria-label': 'Name' }"
+          [showClearButton]="true"
+          [formControl]="heroLevel">
+          <dx-validator>
+            <dxi-validation-rule
+              type="numeric"
+              message="Only numbers."
+            ></dxi-validation-rule>
+          </dx-validator>
+        </dx-text-box>
+      </div>
+    </div>
+    <dx-button
+      text="Добавить героя"
+      (click)="addHero()"
+      type="submit">
+    </dx-button>
+</form>
+<form>
+    <div class="dx-field form-new-skill">
+        <div class="dx-field-label">Новая способность</div>
+        <div class="dx-field-value">
+            <dx-text-box
+              [inputAttr]="{ 'aria-label': 'Name' }"
+              [showClearButton]="true"
+              [formControl]="newSkill"
+              width="150px">
+              <dx-validator>
+                <dxi-validation-rule
+                  type="stringLength"
+                  [min]="2"
+                  message="Skill must have at least 2 symbols"
+                ></dxi-validation-rule>
+              </dx-validator>
+            </dx-text-box>
+        </div>
+        <dx-button
+          text="Добавить способность"
+          (click) = 'addSkill()'
+          width="190px"
+          height="25px">
+        </dx-button>
+    </div>
+</form>
+
