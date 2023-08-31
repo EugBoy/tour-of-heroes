@@ -1,0 +1,64 @@
+.level-filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.filter-label {
+  width: 100px;
+  height: 30px;
+}
+
+.dx-field {
+  display: flex;
+  flex-direction: row;
+}
+
+.filter {
+  display: flex;
+  flex-direction: row;
+}
+
+.show-heroes {
+  margin-top: 100px;
+}
+
+.hero-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  width: 350px;
+  min-height: 50px;
+  margin-top: 10px;
+}
+.skills div {
+  margin-right: 5px;
+  margin-top: 5px;
+  height: 25px;
+  padding: 3px;
+  background-color: #d3d3d3;
+}
+
+.hero-info {
+  display: flex;
+  justify-content: space-between;
+  min-height: 70px;
+}
+.hero-info dx-button {
+  width: 150px;
+  height: 40px;
+  background-color: #031369;
+  color: white;
+}
+
+.hero-info-card {
+  display: flex;
+  flex-direction: column;
+}
+
+/*# sourceMappingURL=show-heroes.component.css.map */

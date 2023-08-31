@@ -6,7 +6,4 @@ export enum HeroLabels {
   LEVEL = 'level',
 }
 
-export enum SkillLabels {
-  ID = 'id',
-  NAME ='name',
-}
+

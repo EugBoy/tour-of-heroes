@@ -1,41 +1,43 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, take} from "rxjs";
-import {HeroApi, SkillApi} from "./components/form-hero/interfaces/form-hero.interface";
-import {HeroLabels, SkillLabels} from "./components/form-hero/entities/enums/form-hero.enum";
-import {HttpClient} from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, take } from "rxjs";
+import { HeroApi } from "../../components/form-hero/entities/interfaces/hero.interface";
+import { SkillApi } from "../../components/form-hero/entities/interfaces/skill.interface";
+import { HeroLabels } from "../../components/form-hero/entities/enums/hero.enum";
+import { SkillLabels } from "../../components/form-hero/entities/enums/skill.enum";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
   response: any =[]
-  constructor(private http: HttpClient) {
+  constructor(private readonly http: HttpClient) {
     this.getData()
   }
 
-  getData(): void {
+  public getData(): void {
     this.http.get('http://127.0.0.1:3000/items')
       .subscribe((response) =>{
         this.response = response
         this.heroes.next(this.response)
       })
   }
-  postData(hero: HeroApi){
+  public postData(hero: HeroApi){
     this.http.post('http://127.0.0.1:3000/items', hero)
       .subscribe();
   }
-  changeData(hero:HeroApi, id:number){
+  public changeData(hero:HeroApi, id:number){
     this.http.put('http://127.0.0.1:3000/items/'+id, hero)
       .subscribe();
   }
 
-  heroes: BehaviorSubject<HeroApi[]> = new BehaviorSubject<HeroApi[]>([])
-  heroes$: Observable<any> = this.heroes.asObservable()
+  public heroes: BehaviorSubject<HeroApi[]> = new BehaviorSubject<HeroApi[]>([])
+  public heroes$: Observable<any> = this.heroes.asObservable()
 
-  skills: BehaviorSubject<SkillApi[]> = new BehaviorSubject<SkillApi[]>([{id: 1,name:'speed'}])
-  skills$: Observable<any> = this.skills.asObservable()
+  public skills: BehaviorSubject<SkillApi[]> = new BehaviorSubject<SkillApi[]>([{id: 1,name:'speed'}])
+  public skills$: Observable<any> = this.skills.asObservable()
 
-  addHero(hero: HeroApi){
+  public addHero(hero: HeroApi){
     this.heroes$.pipe(take(1)).subscribe((val) => {
       let heroID : number = 0;
       let heroLen: number = 0
@@ -53,7 +55,7 @@ export class AppService {
     })
   }
 
-  addSkill(skill: SkillApi){
+  public addSkill(skill: SkillApi){
     this.skills$.pipe(take(1)).subscribe((val) => {
       let skillLen: number = 0
       let skillID : number = 0;
@@ -62,7 +64,7 @@ export class AppService {
         skillID = skills[skillLen-1][SkillLabels.ID]+1
       })
       const newSkill: SkillApi = {
-        name:skill[SkillLabels.NAME],
+        name: skill[SkillLabels.NAME],
         id: skillID
       }
       const newSkillsArray: SkillApi[] = [...val, newSkill]
@@ -70,7 +72,7 @@ export class AppService {
     })
 
   }
-  changeHero(changedHero: HeroApi){
+  public changeHero(changedHero: HeroApi){
     this.heroes$.pipe(take(1)).subscribe((heroes) => {
       for (let hero of heroes){
         if (hero.id === changedHero.id){

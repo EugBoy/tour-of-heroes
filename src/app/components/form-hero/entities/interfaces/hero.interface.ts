@@ -1,4 +1,4 @@
-import {HeroLabels, SkillLabels} from "../entities/enums/form-hero.enum";
+import { HeroLabels } from "../enums/hero.enum";
 export interface HeroApi {
   [HeroLabels.ID] : number,
   [HeroLabels.NAME] : string,
@@ -7,7 +7,4 @@ export interface HeroApi {
   [HeroLabels.LEVEL] : number,
 
 }
-export interface SkillApi {
-  [SkillLabels.ID] : number,
-  [SkillLabels.NAME] : string,
-}
+

@@ -1,0 +1,19 @@
+.dx-field {
+  display: flex;
+}
+
+.form-new-hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 300px;
+}
+
+.form-new-skill {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 130px;
+}
+
+/*# sourceMappingURL=form-hero.component.css.map */

@@ -1,23 +1,27 @@
 $bg-color: #d3d3d3;
-.app{
+@mixin df {
   display: flex;
-  width: 1100px;
-  min-height: 400px;
   justify-content: space-between;
 }
-.form-hero{
-  width: 400px;
-  height: 450px;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
+@mixin form-dis{
   background-color: $bg-color;
   padding: 15px;
+}
+.app{
+  @include df;
+  width: 1100px;
+  min-height: 400px;
+}
+.form-hero{
+  @include df;
+  width: 400px;
+  height: 450px;
+  flex-direction: column;
+  @include form-dis
 }
 .form-skill{
   width: 600px;
   min-height: 350px;
-  background-color: $bg-color;
-  padding: 15px;
+  @include form-dis
 }
 

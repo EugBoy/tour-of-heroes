@@ -1,0 +1,25 @@
+.app {
+  display: flex;
+  justify-content: space-between;
+  width: 1100px;
+  min-height: 400px;
+}
+
+.form-hero {
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+  height: 450px;
+  flex-direction: column;
+  background-color: #d3d3d3;
+  padding: 15px;
+}
+
+.form-skill {
+  width: 600px;
+  min-height: 350px;
+  background-color: #d3d3d3;
+  padding: 15px;
+}
+
+/*# sourceMappingURL=app.component.css.map */
