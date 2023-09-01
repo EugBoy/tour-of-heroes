@@ -1,10 +1,14 @@
-import {Component} from '@angular/core';
-import {HeroApi, SkillApi} from "./interfaces/form-hero.interface";
-import {FormControl} from '@angular/forms'
-import {HeroLabels, SkillLabels} from "./entities/enums/form-hero.enum";
-import {AppService} from "../../app.service";
-import {isNumeric} from "devextreme/core/utils/type";
-import {Observable} from "rxjs";
+import { Component } from '@angular/core';
+import { HeroApi } from "./entities/interfaces/hero.interface";
+import { SkillApi } from "./entities/interfaces/skill.interface";
+import { FormGroup } from '@angular/forms'
+import { HeroLabels } from "./entities/enums/hero.enum";
+import { SkillLabels } from "./entities/enums/skill.enum";
+import { AppService } from "../../entities/services/app.service";
+import { isNumeric } from "devextreme/core/utils/type";
+import { Observable } from "rxjs";
+import { FormHeroService } from "./entities/services/form-hero.service"
+import { FormSkillService} from "./entities/services/form-skill.service";
 
 @Component({
   selector: 'app-form-hero',
@@ -13,49 +17,23 @@ import {Observable} from "rxjs";
 })
 export class FormHeroComponent {
 
-  heroName: FormControl <HeroLabels.NAME | null> = new FormControl(null);
-  heroPower: FormControl <HeroLabels.POWER | null> = new FormControl(null);
-  heroSkills: FormControl <HeroLabels.SKILLS | null> = new FormControl(null);
-  heroLevel: FormControl <HeroLabels.LEVEL | null> = new FormControl(null);
-  newSkill : FormControl <SkillLabels.NAME | null> = new FormControl(null);
+  public _skills$$: Observable<SkillApi[]>;
 
-  skills$: Observable<SkillApi[]>
-
-  constructor(private appService: AppService) {
-    this.skills$ = appService.skills
+  public heroForm: FormGroup;
+  public skillForm: FormGroup;
+  constructor(private readonly appService: AppService,
+              private readonly formHeroService: FormHeroService,
+              private readonly formSkillService: FormSkillService) {
+    this._skills$$ = appService.skills;
+    this.heroForm = formHeroService.getForm()
+    this.skillForm = formSkillService.getForm()
   }
 
-  addSkill(){
-    if (this.newSkill.value!.length >= 2){
-      this.appService.addSkill(
-        {
-          id: 0,
-          name: this.newSkill.value!
-        }
-      )
-      this.newSkill.reset()
-    } else {
-      alert('You have made mistake.')
-    }
+  public addSkill(){
+    this.formSkillService.addSkill()
   }
 
-  addHero(){
-    let heroSkills = String(this.heroSkills.value!).split(',')
-    let hero: HeroApi = {
-          id: 0,
-          name: this.heroName.value!,
-          power: this.heroPower.value!,
-          skills: heroSkills,
-          level: Number(this.heroLevel.value),
-        }
-    if (( hero.name!.length >= 2) && (hero.power!.length >=2) && (isNumeric(hero.level))) {
-      this.appService.addHero(hero);
-      this.heroName.reset();
-      this.heroPower.reset();
-      this.heroSkills.reset();
-      this.heroLevel.reset();
-    } else {
-      alert('You have made mistake.')
-    }
+  public addHero(){
+    this.formHeroService.addHero()
   }
 }

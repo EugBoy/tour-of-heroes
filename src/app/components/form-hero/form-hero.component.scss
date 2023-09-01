@@ -1,16 +1,17 @@
+@mixin form{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .dx-field {
   display: flex;
 }
 .form-new-hero{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  @include form;
   height: 300px;
 }
 .form-new-skill{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  @include form;
   height: 130px;
 
 }
