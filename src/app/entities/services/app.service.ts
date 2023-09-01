@@ -73,7 +73,7 @@ export class AppService {
 
   }
   public changeHero(changedHero: HeroApi){
-    this.heroes$.pipe(take(1)).subscribe((heroes) => {
+    this.heroes$.pipe(take(1)).subscribe((heroes : HeroApi[]) => {
       for (let hero of heroes){
         if (hero.id === changedHero.id){
           hero[HeroLabels.NAME] = changedHero[HeroLabels.NAME]

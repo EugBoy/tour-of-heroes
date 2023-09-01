@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable, take } from "rxjs";
 import { AppService } from "../../entities/services/app.service";
-import { FormControl, FormGroup } from "@angular/forms";
-import { isNumeric } from "devextreme/core/utils/type";
+import { FormGroup } from "@angular/forms";
 import { HeroLabels } from "../form-hero/entities/enums/hero.enum";
 import { SkillLabels } from "../form-hero/entities/enums/skill.enum";
 import { HeroApi } from "../form-hero/entities/interfaces/hero.interface";
@@ -27,7 +26,7 @@ export class ShowHeroesComponent {
 
   public filterHeroesForm: FormGroup;
   public changeHeroForm: FormGroup;
-  constructor(public readonly appService : AppService,
+  constructor(private readonly appService : AppService,
               private readonly filterHeroesService: FilterHeroesService,
               private readonly changeHeroService: ChangeHeroService) {
     this._heroes$$ = appService.heroes;

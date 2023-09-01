@@ -9,10 +9,20 @@ import { FilterHeroesService } from "../services/filter-heroes.service";
 })
 export class FilterHeroesPipe implements PipeTransform {
   public filterForm: FormGroup
-  constructor(filterHeroService: FilterHeroesService) {
+  constructor(private filterHeroService: FilterHeroesService) {
     this.filterForm = filterHeroService.getForm()
   }
 
+  /**
+   * Фильтрация героев по заданным характеристикам
+   *
+   * @param {HeroApi[]} heroes - все герои
+   * @param {boolean} sort - статус сортировки героев по возрастанию уровня
+   * @param {number} levelDown - нижний уровень от которого происходит фильтрация героев по уровню
+   * @param {number} levelUp - верхний уровень от которого происходит фильтрация героев по уровню
+   * @param {string} name - фильтрация по имени
+   * @param {string[]} skills - фильтрация по содержащимся навыкам
+   */
   transform(heroes: HeroApi[] | null, sort: boolean, levelDown: number, levelUp: number, name: string, skills: HeroLabels.SKILLS): HeroApi[] {
     if (Boolean(sort)){
       heroes = heroes!.sort((hero1:HeroApi, hero2:HeroApi) => {

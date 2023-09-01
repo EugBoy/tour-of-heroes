@@ -23,6 +23,10 @@ export class ChangeHeroService {
     })
   }
 
+  /**
+   *
+   * 
+   */
   public getForm(): FormGroup {
     return this.changeHeroForm
   }
