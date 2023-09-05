@@ -7,14 +7,8 @@
       <div class="dx-field-value">
         <dx-text-box [inputAttr]="{ 'aria-label': 'Name' }"
                      [showClearButton]="true"
-                     formControlName="name">
-          <dx-validator>
-            <dxi-validation-rule type="stringLength"
-                                 [min]="2"
-                                 message="Name must have at least 2 symbols"
-            ></dxi-validation-rule>
-          </dx-validator>
-        </dx-text-box>
+                     formControlName="name"
+        ></dx-text-box>
       </div>
     </div>
     <div class="dx-field">
@@ -24,14 +18,8 @@
       <div class="dx-field-value">
         <dx-text-box [inputAttr]="{ 'aria-label': 'Name' }"
                      [showClearButton]="true"
-                     formControlName="power">
-          <dx-validator>
-            <dxi-validation-rule type="stringLength"
-                                 [min]="1"
-                                 message="You must write a power of hero"
-            ></dxi-validation-rule>
-          </dx-validator>
-        </dx-text-box>
+                     formControlName="power"
+        ></dx-text-box>
       </div>
     </div>
     <div class="dx-field">
@@ -42,14 +30,8 @@
         <dx-tag-box [dataSource]="_skills$$ | async"
                     valueExpr="name"
                     displayExpr="name"
-                    formControlName="skills">
-          <dx-validator>
-            <dxi-validation-rule type="stringLength"
-                                 [min]="2"
-                                 message="You must add a skill (skills) of hero. If you dont find your skill, add one in skills form."
-            ></dxi-validation-rule>
-          </dx-validator>
-        </dx-tag-box>
+                    formControlName="skills"
+        ></dx-tag-box>
       </div>
     </div>
     <div class="dx-field">
@@ -59,13 +41,8 @@
       <div class="dx-field-value">
         <dx-text-box [inputAttr]="{ 'aria-label': 'Name' }"
                      [showClearButton]="true"
-                     formControlName="level">
-          <dx-validator>
-            <dxi-validation-rule type="numeric"
-                                 message="Only numbers."
-            ></dxi-validation-rule>
-          </dx-validator>
-        </dx-text-box>
+                     formControlName="level"
+        ></dx-text-box>
       </div>
     </div>
     <dx-button (click)="addHero()"
@@ -82,14 +59,8 @@
             <dx-text-box [inputAttr]="{ 'aria-label': 'Name' }"
                          [showClearButton]="true"
                          formControlName="name"
-                         width="150px">
-              <dx-validator>
-                <dxi-validation-rule type="stringLength"
-                                     [min]="2"
-                                     message="Skill must have at least 2 symbols"
-                ></dxi-validation-rule>
-              </dx-validator>
-            </dx-text-box>
+                         width="150px"
+            ></dx-text-box>
         </div>
         <dx-button (click) = 'addSkill()'
                    text="Добавить способность"

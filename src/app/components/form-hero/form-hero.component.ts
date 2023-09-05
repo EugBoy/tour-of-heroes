@@ -1,11 +1,7 @@
-import { Component } from '@angular/core';
-import { HeroApi } from "./entities/interfaces/hero.interface";
-import { SkillApi } from "./entities/interfaces/skill.interface";
+import {Component, OnInit} from '@angular/core';
+import { ItemApi } from "./entities/interfaces/item.interface";
 import { FormGroup } from '@angular/forms'
-import { HeroLabels } from "./entities/enums/hero.enum";
-import { SkillLabels } from "./entities/enums/skill.enum";
 import { AppService } from "../../entities/services/app.service";
-import { isNumeric } from "devextreme/core/utils/type";
 import { Observable } from "rxjs";
 import { FormHeroService } from "./entities/services/form-hero.service"
 import { FormSkillService} from "./entities/services/form-skill.service";
@@ -17,23 +13,30 @@ import { FormSkillService} from "./entities/services/form-skill.service";
 })
 export class FormHeroComponent {
 
-  public _skills$$: Observable<SkillApi[]>;
+  public _skills$$: Observable<ItemApi[]>;
 
   public heroForm: FormGroup;
   public skillForm: FormGroup;
-  constructor(private readonly appService: AppService,
-              private readonly formHeroService: FormHeroService,
-              private readonly formSkillService: FormSkillService) {
-    this._skills$$ = appService.skills;
-    this.heroForm = formHeroService.getForm()
-    this.skillForm = formSkillService.getForm()
+  constructor(
+    private readonly _appService: AppService,
+    private readonly _formHeroService: FormHeroService,
+    private readonly _formSkillService: FormSkillService) {
+      this._skills$$ = _appService.skills;
+      this.heroForm = _formHeroService.getForm()
+      this.skillForm = _formSkillService.getForm()
   }
 
+  /**
+   * Метод обращения к FormSkillService для добавления нового навыка
+   */
   public addSkill(){
-    this.formSkillService.addSkill()
+    this._formSkillService.addSkill()
   }
 
+  /**
+   * Метод обращения к FormHeroService для добавления нового героя
+   */
   public addHero(){
-    this.formHeroService.addHero()
+    this._formHeroService.addHero()
   }
 }

@@ -1,21 +1,18 @@
-import { HeroLabels } from "../enums/hero.enum";
+import { LHero } from "../enums/hero.enum";
+import { ItemApi } from "./item.interface";
 
 /**
- * Интерфейс данных о герое с учётом текущих компонентов
+ * Интерфейс данных о герое
  *
- * @param {number} ID - личный идентификатор героя
- * @param {string} NAME - имя героя
  * @param {string} POWER - сила героя
  * @param {string[]} SKILLS - навыки героя
  * @param {number} LEVEL - уровень героя
+ * @implements ItemApi
  */
-export interface HeroApi {
-  [HeroLabels.ID] : number;
-  [HeroLabels.NAME] : string;
-  [HeroLabels.POWER] : string;
-  [HeroLabels.SKILLS] : string[];
-  [HeroLabels.LEVEL] : number;
-
+export interface HeroApi extends ItemApi{
+  [LHero.POWER] : string;
+  [LHero.SKILLS] : string[];
+  [LHero.LEVEL] : number;
 
 }
 

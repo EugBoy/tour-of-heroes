@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { Observable, take } from "rxjs";
 import { AppService } from "../../entities/services/app.service";
-import { FormGroup } from "@angular/forms";
-import { HeroLabels } from "../form-hero/entities/enums/hero.enum";
-import { SkillLabels } from "../form-hero/entities/enums/skill.enum";
+import { FormControl, FormGroup } from "@angular/forms";
+import { isNumeric } from "devextreme/core/utils/type";
+import { LHero } from "../form-hero/entities/enums/hero.enum";
+import { LItem } from "../form-hero/entities/enums/item.enum";
 import { HeroApi } from "../form-hero/entities/interfaces/hero.interface";
-import { SkillApi } from "../form-hero/entities/interfaces/skill.interface";
+import { ItemApi } from "../form-hero/entities/interfaces/item.interface";
 import { FilterHeroesService } from "./entities/services/filter-heroes.service";
 import { ChangeHeroService } from "./entities/services/change-hero.service";
 
@@ -19,14 +20,14 @@ import { ChangeHeroService } from "./entities/services/change-hero.service";
 export class ShowHeroesComponent {
 
   public _heroes$$: Observable<HeroApi[]>;
-  public _skills$$: Observable<SkillApi[]>;
+  public _skills$$: Observable<ItemApi[]>;
 
   public isPopupVisible: boolean;
-  public currentSkills: SkillLabels.NAME[];
+  public currentSkills: LItem.NAME[];
 
   public filterHeroesForm: FormGroup;
   public changeHeroForm: FormGroup;
-  constructor(private readonly appService : AppService,
+  constructor(public readonly appService : AppService,
               private readonly filterHeroesService: FilterHeroesService,
               private readonly changeHeroService: ChangeHeroService) {
     this._heroes$$ = appService.heroes;
@@ -56,5 +57,8 @@ export class ShowHeroesComponent {
     this.changeHeroService.changeHero(id);
     this.isPopupVisible = !this.isPopupVisible;
   }
-  protected readonly HeroLabels = HeroLabels;
+
+  protected readonly LItem = LItem;
+
+  protected readonly LHero = LHero;
 }

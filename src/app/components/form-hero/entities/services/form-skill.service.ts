@@ -7,20 +7,24 @@ import { AppService } from "../../../../entities/services/app.service";
 })
 export class FormSkillService {
   public skillForm: FormGroup
-  constructor(private readonly fb: FormBuilder,
-              private readonly appService: AppService) {
-    this.skillForm = fb.group({
+  constructor(private readonly _formBuilder: FormBuilder,
+              private readonly _appService: AppService) {
+    this.skillForm = _formBuilder.group({
       name:''
     })
   }
 
-  public getForm(){
+  /**
+   * Метод возвращает форму нового навыка
+   */
+  public getForm(): FormGroup{
     return this.skillForm
   }
 
+
   public addSkill(){
     if (this.skillForm.controls['name'].value!.length >= 2){
-      this.appService.addSkill(
+      this._appService.addSkill(
         {
           id: 0,
           name: this.skillForm.controls['name'].value!

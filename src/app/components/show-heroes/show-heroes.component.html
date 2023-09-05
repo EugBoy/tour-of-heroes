@@ -91,10 +91,10 @@
   <div  *dxTemplate="let hero of 'title'">
     <div class="hero-title">
       <div>
-        {{ hero[HeroLabels.NAME] }}
+        {{ hero[LItem.NAME] }}
       </div>
       <div>
-        Уровень: {{ hero[HeroLabels.LEVEL] }}
+        Уровень: {{ hero[LHero.LEVEL] }}
       </div>
     </div>
   </div>
@@ -102,23 +102,23 @@
        *dxTemplate="let hero of 'item'">
     <div class="hero-info-card">
       <div>
-        {{ hero[HeroLabels.POWER] }}
+        {{ hero[LHero.POWER] }}
       </div>
       <div class="skills">
-        <div *ngFor = 'let skill of hero[HeroLabels.SKILLS]'>
+        <div *ngFor = 'let skill of hero[LHero.SKILLS]'>
           {{ skill }}
         </div>
       </div>
     </div>
     <dx-button class="button-info"
                text="Редактировать"
-               (onClick)="togglePopup(hero, hero[HeroLabels.ID])"
+               (onClick)="togglePopup(hero, hero[LItem.ID])"
     ></dx-button>
     <dx-popup [height]="500"
               [width]="500"
               [(visible)]="isPopupVisible"
               [hideOnOutsideClick]="true"
-              title="Редактирование персонажа {{hero[HeroLabels.NAME]}}">
+              title="Редактирование персонажа {{hero[LItem.NAME]}}">
       <div [formGroup]="changeHeroForm">
         <div class="dx-field">
           <div class="dx-field-label">
@@ -128,7 +128,7 @@
             <dx-text-box [inputAttr]="{ 'aria-label': 'Name' }"
                          [showClearButton]="true"
                          formControlName="name"
-                         text="{{hero[HeroLabels.NAME]}}">
+                         text="{{hero[LItem.NAME]}}">
               <dx-validator>
                 <dxi-validation-rule type="stringLength"
                                      [min]="2"
@@ -146,7 +146,7 @@
             <dx-text-box [inputAttr]="{ 'aria-label': 'Name' }"
                          [showClearButton]="true"
                          formControlName="power"
-                         text="{{ hero[HeroLabels.POWER] }}">
+                         text="{{ hero[LHero.POWER] }}">
               <dx-validator>
                 <dxi-validation-rule type="stringLength"
                                      [min]="1"
@@ -158,7 +158,7 @@
         </div>
         <div class="dx-field">
           <div class="dx-field-label">
-            Способности {{ hero[HeroLabels.SKILLS] }}
+            Способности {{ hero[LHero.SKILLS] }}
           </div>
           <div class="dx-field-value">
             <dx-tag-box [dataSource]="_skills$$ | async"
@@ -182,7 +182,7 @@
             <dx-text-box [inputAttr]="{ 'aria-label': 'Name' }"
                          [showClearButton]="true"
                          formControlName="level"
-                         text="{{ hero[HeroLabels.LEVEL] }}">
+                         text="{{ hero[LHero.LEVEL] }}">
               <dx-validator>
                 <dxi-validation-rule type="numeric"
                                      message="Only numbers."
@@ -191,7 +191,7 @@
             </dx-text-box>
           </div>
         </div>
-        <dx-button (click)="changeHero(hero[HeroLabels.ID])"
+        <dx-button (click)="changeHero(hero[LItem.ID])"
                    text="Редактировать героя"
                    type="submit"
         ></dx-button>
