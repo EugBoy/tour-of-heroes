@@ -4,17 +4,19 @@ import { HeroApi } from "../interfaces/hero.interface";
 import { isNumeric } from "devextreme/core/utils/type";
 import { AppService } from "../../../../entities/services/app.service";
 import {LHero} from "../enums/hero.enum";
+import {LItem} from "../enums/item.enum";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormHeroService {
   public heroForm: FormGroup = this._formBuilder.group({
-    name: ['', [Validators.required]],
-    power: ['', [Validators.required]],
-    skills: ['', [Validators.required]],
-    level: ['', [Validators.required, Validators.min(1)]],
+    [LItem.NAME]: ['', [Validators.required, Validators.minLength(2)]],
+    [LHero.POWER]: ['', [Validators.required,Validators.minLength(2)]],
+    [LHero.SKILLS]: ['', [Validators.required]],
+    [LHero.LEVEL]: ['', [Validators.required, Validators.min(1)]],
   });
+
   constructor(
     private readonly _formBuilder: FormBuilder,
     private readonly _appService: AppService) {
@@ -32,10 +34,10 @@ export class FormHeroService {
    */
   public addHero(){
     let hero: HeroApi = {
-      name: this.heroForm.controls['name'].value,
-      power: this.heroForm.controls['power'].value,
-      skills: this.heroForm.controls['skills'].value,
-      level: this.heroForm.controls['level'].value,
+      name: this.controls[LItem.NAME].value,
+      power: this.controls[LHero.POWER].value,
+      skills: this.controls[LHero.SKILLS].value,
+      level: this.controls[LHero.LEVEL].value,
     }
 
     if (this.heroForm.valid && isNumeric(hero[LHero.LEVEL])){
@@ -46,6 +48,11 @@ export class FormHeroService {
       alert('При заполнении формы допущена ошибка!')
     }
   }
+
+  get controls(){
+    return this.heroForm.controls
+  }
+
 }
 
 

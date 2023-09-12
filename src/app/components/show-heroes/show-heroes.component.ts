@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Observable, take } from "rxjs";
 import { AppService } from "../../entities/services/app.service";
 import { FormControl, FormGroup } from "@angular/forms";
@@ -17,48 +17,38 @@ import { ChangeHeroService } from "./entities/services/change-hero.service";
   styleUrls: ['./show-heroes.component.scss']
 })
 
-export class ShowHeroesComponent {
+export class ShowHeroesComponent implements OnInit {
 
-  public _heroes$$: Observable<HeroApi[]>;
-  public _skills$$: Observable<ItemApi[]>;
+  public _heroes$$: Observable<HeroApi[]> = this._appService._heroes$$;
+  public _skills$$: Observable<ItemApi[]> = this._appService._skills$$;
 
-  public isPopupVisible: boolean;
-  public currentSkills: LItem.NAME[];
+  public isPopupVisible: boolean = false;
 
-  public filterHeroesForm: FormGroup;
-  public changeHeroForm: FormGroup;
-  constructor(public readonly appService : AppService,
-              private readonly filterHeroesService: FilterHeroesService,
-              private readonly changeHeroService: ChangeHeroService) {
-    this._heroes$$ = appService.heroes;
-    this._skills$$ = appService.skills;
-    this.filterHeroesForm = filterHeroesService.getForm();
-    this.changeHeroForm = changeHeroService.getForm();
-    this.isPopupVisible = false;
-    this.currentSkills = [];
+  public filterHeroesForm: FormGroup = this._filterHeroesService.getForm();
+  public changeHeroForm: FormGroup = this._changeHeroService.getForm();
+  constructor(public readonly _appService : AppService,
+              private readonly _filterHeroesService: FilterHeroesService,
+              private readonly _changeHeroService: ChangeHeroService) {
   }
 
-  public togglePopup(hero: any, id: number): void {
+  public ngOnInit() {
+    this._appService.getHeroes();
+  }
+
+  public togglePopup(hero: HeroApi, id: number): void {
     this.isPopupVisible = !this.isPopupVisible;
-    this.changeHeroForm.controls['name'].setValue(hero.name)
-    this.changeHeroForm.controls['power'].setValue(hero.power)
-    this.changeHeroForm.controls['skills'].setValue(hero.skills)
-    this.changeHeroForm.controls['level'].setValue(hero.level)
-
-    this._heroes$$.pipe(take(1)).subscribe((heroes:HeroApi[]) => {
-      for(hero of heroes){
-        if (hero.id === id){
-          this.currentSkills = hero.skills
-        }
-      }
-    })
+    this.changeHeroForm.controls[LItem.NAME].setValue(hero[LItem.NAME])
+    this.changeHeroForm.controls[LHero.POWER].setValue(hero[LHero.POWER])
+    this.changeHeroForm.controls[LHero.SKILLS].setValue(hero[LHero.SKILLS])
+    this.changeHeroForm.controls[LHero.LEVEL].setValue(hero[LHero.LEVEL])
   }
+
   public changeHero(id: number){
-    this.changeHeroService.changeHero(id);
+    this._changeHeroService.changeHero(id);
     this.isPopupVisible = !this.isPopupVisible;
   }
 
   protected readonly LItem = LItem;
-
   protected readonly LHero = LHero;
+
 }

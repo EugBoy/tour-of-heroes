@@ -5,6 +5,7 @@ import { AppService } from "../../entities/services/app.service";
 import { Observable } from "rxjs";
 import { FormHeroService } from "./entities/services/form-hero.service"
 import { FormSkillService} from "./entities/services/form-skill.service";
+import {LItem} from "./entities/enums/item.enum";
 
 @Component({
   selector: 'app-form-hero',
@@ -13,17 +14,14 @@ import { FormSkillService} from "./entities/services/form-skill.service";
 })
 export class FormHeroComponent {
 
-  public _skills$$: Observable<ItemApi[]>;
+  public _skills$$: Observable<ItemApi[]> = this._appService._skills$$;
+  public heroForm: FormGroup = this._formHeroService.getForm();
+  public skillForm: FormGroup = this._formSkillService.getForm();
 
-  public heroForm: FormGroup;
-  public skillForm: FormGroup;
   constructor(
     private readonly _appService: AppService,
     private readonly _formHeroService: FormHeroService,
     private readonly _formSkillService: FormSkillService) {
-      this._skills$$ = _appService.skills;
-      this.heroForm = _formHeroService.getForm()
-      this.skillForm = _formSkillService.getForm()
   }
 
   /**
@@ -39,4 +37,7 @@ export class FormHeroComponent {
   public addHero(){
     this._formHeroService.addHero()
   }
+
+  protected readonly alert = alert;
+  protected readonly LItem = LItem;
 }

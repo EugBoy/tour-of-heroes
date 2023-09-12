@@ -5,20 +5,18 @@ import { FormBuilder, FormGroup } from "@angular/forms";
   providedIn: 'root'
 })
 export class FilterHeroesService {
-  filterHeroes: FormGroup;
-  constructor(private readonly fb: FormBuilder) {
-    this.filterHeroes = fb.group({
-      levelDown: '',
-      levelUp: '',
-      skills: [],
-      name: '',
-      sort: false,
-    })
+  filterHeroes: FormGroup = this._formBuilder.group({
+    levelDown: '',
+    levelUp: '',
+    skills: [],
+    name: '',
+    sort: false,
+  })
+
+  constructor(private readonly _formBuilder: FormBuilder) {
   }
 
   public getForm(): FormGroup{
     return this.filterHeroes
   }
-
-
 }
