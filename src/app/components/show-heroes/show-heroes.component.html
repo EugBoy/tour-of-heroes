@@ -46,7 +46,7 @@
         Способности
       </div>
       <div class="dx-field-value">
-        <dx-tag-box [dataSource]="_skills$$ | async"
+        <dx-tag-box [dataSource]="skills$ | async"
                     valueExpr="name"
                     displayExpr="name"
                     formControlName="skills">
@@ -85,7 +85,7 @@
 </div>
 <dx-accordion itemTemplate="item"
               itemTitleTemplate="title"
-              [dataSource]="_heroes$$ | async | filterHeroes: this.filterHeroesForm.controls['sort'].value! : this.filterHeroesForm.controls['levelDown'].value! : this.filterHeroesForm.controls['levelUp'].value! : this.filterHeroesForm.controls['name'].value! : this.filterHeroesForm.controls['skills'].value! "
+              [dataSource]=" heroes$ | async | filterHeroes: this.filterHeroesForm.controls['sort'].value! : this.filterHeroesForm.controls['levelDown'].value! : this.filterHeroesForm.controls['levelUp'].value! : this.filterHeroesForm.controls['name'].value! : this.filterHeroesForm.controls['skills'].value! "
               [collapsible]="true"
               class="show-heroes">
   <div  *dxTemplate="let hero of 'title'">
@@ -114,6 +114,9 @@
                text="Редактировать"
                (onClick)="togglePopup(hero, hero[LItem.ID])"
     ></dx-button>
+    <app-popup
+    ></app-popup>
+    <app-popup></app-popup>
     <dx-popup [height]="500"
               [width]="500"
               [(visible)]="isPopupVisible"
@@ -161,18 +164,12 @@
             Способности {{ hero[LHero.SKILLS] }}
           </div>
           <div class="dx-field-value">
-            <dx-tag-box [dataSource]="_skills$$ | async"
+            <dx-tag-box [dataSource]="skills$ | async"
                         [value]="hero[LHero.SKILLS]"
                         [showSelectionControls]="true"
                         valueExpr="name"
                         displayExpr="name"
                         formControlName="skills">
-              <dx-validator>
-                <dxi-validation-rule type="stringLength"
-                                     [min]="2"
-                                     message="You must add a skill (skills) of hero. If you dont find your skill, add one in skills form."
-                ></dxi-validation-rule>
-              </dx-validator>
             </dx-tag-box>
           </div>
         </div>
@@ -183,11 +180,6 @@
                          [showClearButton]="true"
                          formControlName="level"
                          text="{{ hero[LHero.LEVEL] }}">
-              <dx-validator>
-                <dxi-validation-rule type="numeric"
-                                     message="Only numbers."
-                ></dxi-validation-rule>
-              </dx-validator>
             </dx-text-box>
           </div>
         </div>

@@ -19,8 +19,8 @@ import { ChangeHeroService } from "./entities/services/change-hero.service";
 
 export class ShowHeroesComponent implements OnInit {
 
-  public _heroes$$: Observable<HeroApi[]> = this._appService._heroes$$;
-  public _skills$$: Observable<ItemApi[]> = this._appService._skills$$;
+  public heroes$: Observable<HeroApi[]> = this._appService.heroes$;
+  public skills$: Observable<ItemApi[]> = this._appService.skills$;
 
   public isPopupVisible: boolean = false;
 

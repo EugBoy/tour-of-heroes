@@ -14,7 +14,7 @@ import {LItem} from "./entities/enums/item.enum";
 })
 export class FormHeroComponent {
 
-  public _skills$$: Observable<ItemApi[]> = this._appService._skills$$;
+  public skills$: Observable<ItemApi[]> = this._appService.skills$;
   public heroForm: FormGroup = this._formHeroService.getForm();
   public skillForm: FormGroup = this._formSkillService.getForm();
 

@@ -1,1 +1,83 @@
-<p>popup works!</p>
+<!--<dx-popup [height]="500"-->
+<!--          [width]="500"-->
+<!--          [(visible)]="isPopupVisible"-->
+<!--          [hideOnOutsideClick]="true"-->
+<!--          title="Редактирование персонажа {{hero[LItem.NAME]}}">-->
+<!--  <div [formGroup]="changeHeroForm">-->
+<!--    <div class="dx-field">-->
+<!--      <div class="dx-field-label">-->
+<!--        Имя-->
+<!--      </div>-->
+<!--      <div class="dx-field-value">-->
+<!--        <dx-text-box [inputAttr]="{ 'aria-label': 'Name' }"-->
+<!--                     [showClearButton]="true"-->
+<!--                     formControlName="name"-->
+<!--                     text="{{hero[LItem.NAME]}}">-->
+<!--          <dx-validator>-->
+<!--            <dxi-validation-rule type="stringLength"-->
+<!--                                 [min]="2"-->
+<!--                                 message="Name must have at least 2 symbols"-->
+<!--            ></dxi-validation-rule>-->
+<!--          </dx-validator>-->
+<!--        </dx-text-box>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="dx-field">-->
+<!--      <div class="dx-field-label">-->
+<!--        Сила-->
+<!--      </div>-->
+<!--      <div class="dx-field-value">-->
+<!--        <dx-text-box [inputAttr]="{ 'aria-label': 'Name' }"-->
+<!--                     [showClearButton]="true"-->
+<!--                     formControlName="power"-->
+<!--                     text="{{ hero[LHero.POWER] }}">-->
+<!--          <dx-validator>-->
+<!--            <dxi-validation-rule type="stringLength"-->
+<!--                                 [min]="1"-->
+<!--                                 message="You must write a power of hero"-->
+<!--            ></dxi-validation-rule>-->
+<!--          </dx-validator>-->
+<!--        </dx-text-box>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="dx-field">-->
+<!--      <div class="dx-field-label">-->
+<!--        Способности {{ hero[LHero.SKILLS] }}-->
+<!--      </div>-->
+<!--      <div class="dx-field-value">-->
+<!--        <dx-tag-box [dataSource]="_skills$$ | async"-->
+<!--                    [value]="hero[LHero.SKILLS]"-->
+<!--                    [showSelectionControls]="true"-->
+<!--                    valueExpr="name"-->
+<!--                    displayExpr="name"-->
+<!--                    formControlName="skills">-->
+<!--          <dx-validator>-->
+<!--            <dxi-validation-rule type="stringLength"-->
+<!--                                 [min]="2"-->
+<!--                                 message="You must add a skill (skills) of hero. If you dont find your skill, add one in skills form."-->
+<!--            ></dxi-validation-rule>-->
+<!--          </dx-validator>-->
+<!--        </dx-tag-box>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="dx-field">-->
+<!--      <div class="dx-field-label">Начальный уровень</div>-->
+<!--      <div class="dx-field-value">-->
+<!--        <dx-text-box [inputAttr]="{ 'aria-label': 'Name' }"-->
+<!--                     [showClearButton]="true"-->
+<!--                     formControlName="level"-->
+<!--                     text="{{ hero[LHero.LEVEL] }}">-->
+<!--          <dx-validator>-->
+<!--            <dxi-validation-rule type="numeric"-->
+<!--                                 message="Only numbers."-->
+<!--            ></dxi-validation-rule>-->
+<!--          </dx-validator>-->
+<!--        </dx-text-box>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <dx-button (click)="changeHero(hero[LItem.ID])"-->
+<!--               text="Редактировать героя"-->
+<!--               type="submit"-->
+<!--    ></dx-button>-->
+<!--  </div>-->
+<!--</dx-popup>-->
