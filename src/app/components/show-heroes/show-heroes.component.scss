@@ -7,14 +7,27 @@ $bg-color: #d3d3d3;
   flex-direction: row;
 }
 
+.filters{
+  display: flex;
+  flex-direction: row;
+  width: 340px;
+}
+
+.filters-label {
+  width: 100px;
+  margin-right: 124px;
+}
+
 .level-filter{
-  @include flex-row;
-  justify-content: space-between;
+  display: flex;
 }
 .filter-label{
   width: 100px;
   height: 30px;
+  margin-right: -7px;
+
 }
+
 .dx-field{
   @include flex-row;
 }

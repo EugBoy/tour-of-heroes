@@ -8,7 +8,7 @@ import {
   DxAccordionModule,
   DxCheckBoxModule, DxPopupModule
 } from "devextreme-angular";
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +17,7 @@ import { FormHeroComponent } from './components/form-hero/form-hero.component';
 import { ShowHeroesComponent } from './components/show-heroes/show-heroes.component';
 import { FilterHeroesPipe } from './components/show-heroes/entities/pipes/filter-heroes.pipe';
 import { PopupComponent } from './components/show-heroes/popup/popup.component';
+import { FormSkillComponent } from './components/form-skill/form-skill.component';
 
 @NgModule({
   declarations: [
@@ -25,20 +26,22 @@ import { PopupComponent } from './components/show-heroes/popup/popup.component';
     ShowHeroesComponent,
     FilterHeroesPipe,
     PopupComponent,
+    FormSkillComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    DxButtonModule,
-    DxTagBoxModule,
-    ReactiveFormsModule,
-    DxTextBoxModule,
-    DxValidatorModule,
-    DxAccordionModule,
-    HttpClientModule,
-    DxCheckBoxModule,
-    DxPopupModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        DxButtonModule,
+        DxTagBoxModule,
+        ReactiveFormsModule,
+        DxTextBoxModule,
+        DxValidatorModule,
+        DxAccordionModule,
+        HttpClientModule,
+        DxCheckBoxModule,
+        DxPopupModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

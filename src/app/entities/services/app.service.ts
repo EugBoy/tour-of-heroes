@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
+import {OnInit, DestroyRef, Injectable} from '@angular/core';
+import {BehaviorSubject, Observable, tap} from "rxjs";
 import { HeroApi } from "../../components/form-hero/entities/interfaces/hero.interface";
 import { ItemApi } from "../../components/form-hero/entities/interfaces/item.interface";
 import { LItem } from "../../components/form-hero/entities/enums/item.enum";
@@ -17,8 +17,8 @@ export class AppService{
   public skills$: Observable<ItemApi[]> = this._skills$$.asObservable();
 
   constructor(
-    private readonly http: HttpClient
-    ) {
+    private readonly http: HttpClient,
+    private readonly _destroyRef: DestroyRef) {
   }
 
   /**
@@ -26,9 +26,10 @@ export class AppService{
    */
   public getHeroes(): any {
       this.http.get<HeroApi[]>('http://127.0.0.1:3000/items')
-        .subscribe( (heroes$: HeroApi[]) => {
-          this._heroes$$.next(heroes$)
-        })
+        .pipe(tap( (heroes: HeroApi[]) => {
+          this._heroes$$.next(heroes)
+        }))
+        .subscribe()
   }
 
   /**
@@ -55,7 +56,6 @@ export class AppService{
   }
 
   /**
-   * Метод добавления данных о новом навыке
    *
    * @param {[ItemApi.NAME]} skill - имя нового навыка
    */

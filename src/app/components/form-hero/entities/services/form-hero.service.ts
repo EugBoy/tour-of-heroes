@@ -10,12 +10,6 @@ import {LItem} from "../enums/item.enum";
   providedIn: 'root'
 })
 export class FormHeroService {
-  public heroForm: FormGroup = this._formBuilder.group({
-    [LItem.NAME]: ['', [Validators.required, Validators.minLength(2)]],
-    [LHero.POWER]: ['', [Validators.required,Validators.minLength(2)]],
-    [LHero.SKILLS]: ['', [Validators.required]],
-    [LHero.LEVEL]: ['', [Validators.required, Validators.min(1)]],
-  });
 
   constructor(
     private readonly _formBuilder: FormBuilder,
@@ -26,33 +20,28 @@ export class FormHeroService {
    * Метод возвращает форму героя
    */
   public getForm(): FormGroup{
-    return this.heroForm
+    return this._formBuilder.group({
+      [LItem.NAME]: ['', [Validators.required, Validators.minLength(2)]],
+      [LHero.POWER]: ['', [Validators.required,Validators.minLength(2)]],
+      [LHero.SKILLS]: ['', [Validators.required]],
+      [LHero.LEVEL]: ['', [Validators.required, Validators.min(1)]],
+    });
   }
 
   /**
    * Метод формирования данных нового героя
    */
-  public addHero(){
-    let hero: HeroApi = {
-      name: this.controls[LItem.NAME].value,
-      power: this.controls[LHero.POWER].value,
-      skills: this.controls[LHero.SKILLS].value,
-      level: this.controls[LHero.LEVEL].value,
-    }
+  public addHero(heroForm: FormGroup){
+    let hero: HeroApi = heroForm.getRawValue();
 
-    if (this.heroForm.valid && isNumeric(hero[LHero.LEVEL])){
+    if (heroForm.valid && isNumeric(hero[LHero.LEVEL])){
       this._appService.addHero(hero);
-      this.heroForm.reset();
+      heroForm.reset();
     }
     else {
       alert('При заполнении формы допущена ошибка!')
     }
   }
-
-  get controls(){
-    return this.heroForm.controls
-  }
-
 }
 
 

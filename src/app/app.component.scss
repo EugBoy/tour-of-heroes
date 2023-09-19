@@ -1,25 +1,40 @@
 $bg-color: #d3d3d3;
 @mixin df {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
 }
 @mixin form-dis{
   background-color: $bg-color;
   padding: 15px;
 }
 .app{
-  @include df;
-  width: 1100px;
+  display: flex;
+  flex-direction: row;
+  width: 1200px;
   min-height: 400px;
+  flex-wrap: wrap;
 }
-.form-hero{
+
+.forms {
   @include df;
   width: 400px;
-  height: 450px;
-  flex-direction: column;
-  @include form-dis
+  height: 500px;
+  @include form-dis;
+  margin-right: 15px;
+}
+
+.form-hero{
+  width: 400px;
+  height: 350px;
+  @include df;
 }
 .form-skill{
+  width: 400px;
+  height: 100px;
+  @include df;
+  justify-content: space-between;
+}
+.show-heroes{
   width: 600px;
   min-height: 350px;
   @include form-dis
