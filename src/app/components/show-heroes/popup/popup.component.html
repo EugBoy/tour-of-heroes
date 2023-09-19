@@ -1,7 +1,8 @@
 <dx-popup [height]="500"
           [width]="500"
-          [(visible)]="isPopupVisible"
+          [visible]="true"
           [hideOnOutsideClick]="true"
+          (onHidden)="close()"
           title="Редактирование персонажа {{currentHero[LItem.NAME]}}">
   <div [formGroup]="changeHeroForm">
     <div class="dx-field">
