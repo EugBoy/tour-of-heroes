@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Observable} from "rxjs";
 import {ItemApi} from "../../form-hero/entities/interfaces/item.interface";
 import {FormGroup} from "@angular/forms";
@@ -13,11 +13,14 @@ import {LHero} from "../../form-hero/entities/enums/hero.enum";
   templateUrl: './popup.component.html',
   styleUrls: ['./popup.component.scss']
 })
-export class PopupComponent implements OnInit{
+export class PopupComponent implements OnInit, OnChanges {
 
   @Input() public currentHero: any;
   @Input() public isPopupVisible: boolean = false;
-  @Input() public currentId: number = 0;
+
+  @Output()
+  public isPopupVisibleChange: EventEmitter<false> = new EventEmitter<false>();
+
 
   public skills$: Observable<ItemApi[]> = this._appService.skills$;
   public changeHeroForm: FormGroup = this._popupService.getForm();
@@ -32,10 +35,19 @@ export class PopupComponent implements OnInit{
     this.changeHeroForm.get([LHero.LEVEL])?.setValue(this.currentHero[LHero.LEVEL]);
   }
 
+  public ngOnChanges(changes: SimpleChanges) {
+    console.log('current hero', this.currentHero);
+    console.log('vis', this.isPopupVisible);
+  }
+
   public changeHero(id: number){
     this._popupService.changeHero(this.changeHeroForm, id);
     this.isPopupVisible = !this.isPopupVisible;
 
+  }
+
+  public close(): void {
+    this.isPopupVisibleChange.emit(false);
   }
 
   protected readonly LItem = LItem;

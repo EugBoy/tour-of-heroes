@@ -115,12 +115,12 @@
     </div>
     <dx-button class="button-info"
                text="Редактировать"
-               (click) = "togglePopup(hero)"
+               (click)="openEditHeroPopup(hero)"
     ></dx-button>
-    <app-popup [currentHero]="hero"
-               [currentId]= "hero[LItem.ID]"
-               [isPopupVisible]="isPopupVisible"
-    ></app-popup>
   </div>
 </dx-accordion>
 
+<app-popup *ngIf="isPopupVisible"
+           [currentHero]="currentHero"
+           [(isPopupVisible)]="isPopupVisible"
+></app-popup>

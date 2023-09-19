@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, DoCheck, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { Observable, take } from "rxjs";
 import { AppService } from "../../entities/services/app.service";
 import { FormGroup } from "@angular/forms";
@@ -16,38 +16,28 @@ import { FilterHeroesService } from "./entities/services/filter-heroes.service";
 })
 
 export class ShowHeroesComponent implements OnInit {
-
-  @Output() public currentHero: HeroApi = {
-    name : 'name',
-    id: 0,
-    level: 0,
-    power: "",
-    skills: [],
-  };
-  @Output() public isPopupVisible: boolean = false;
-
   public skills$: Observable<ItemApi[]> = this._appService.skills$;
   public heroes$: Observable<HeroApi[]> = this._appService.heroes$;
 
   public filterHeroesForm: FormGroup = this._filterHeroesService.getForm();
 
+  public currentHero: HeroApi = <HeroApi>{};
+  public isPopupVisible: boolean = false;
 
 
   constructor(
     public readonly _appService : AppService,
     private readonly _filterHeroesService: FilterHeroesService,
   ) {
-
   }
 
   public ngOnInit() {
     this._appService.getHeroes();
   }
 
-  public togglePopup(hero: HeroApi): void {
+  public openEditHeroPopup(hero: HeroApi): void {
     this.currentHero = hero;
-    this.isPopupVisible = !this.isPopupVisible;
-    console.log(this.currentHero)
+    this.isPopupVisible = true;
   }
 
   protected readonly LItem = LItem;
