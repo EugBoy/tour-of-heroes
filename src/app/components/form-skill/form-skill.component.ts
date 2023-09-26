@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {FormGroup} from "@angular/forms";
 import {FormSkillService} from "./entities/services/form-skill.service";
+import {LHero} from "../form-hero/entities/enums/hero.enum";
+import {LItem} from "../form-hero/entities/enums/item.enum";
 
 @Component({
   selector: 'app-form-skill',
@@ -19,7 +21,13 @@ export class FormSkillComponent {
    * Метод обращения к FormSkillService для добавления нового навыка
    */
   public addSkill(){
-    this._formSkillService.addSkill(this.skillForm)
+    if (this.skillForm.valid){
+      this._formSkillService.addSkill(this.skillForm)
+    } else {
+      alert('При заполнении допущена ошибка.')
+    }
   }
 
+  protected readonly LHero = LHero;
+  protected readonly LItem = LItem;
 }

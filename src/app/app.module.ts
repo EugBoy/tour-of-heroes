@@ -16,7 +16,7 @@ import { AppComponent } from './app.component';
 import { FormHeroComponent } from './components/form-hero/form-hero.component';
 import { ShowHeroesComponent } from './components/show-heroes/show-heroes.component';
 import { FilterHeroesPipe } from './components/show-heroes/entities/pipes/filter-heroes.pipe';
-import { PopupComponent } from './components/show-heroes/popup/popup.component';
+import { PopupComponent} from "./components/show-heroes/entities/popups/popup/popup.component";
 import { FormSkillComponent } from './components/form-skill/form-skill.component';
 
 @NgModule({

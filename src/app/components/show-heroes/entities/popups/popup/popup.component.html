@@ -1,0 +1,64 @@
+<dx-popup [height]="400"
+          [width]="500"
+          [visible]="true"
+          [hideOnOutsideClick]="true"
+          (onHidden)="close()"
+          title="Редактирование персонажа {{currentHero[LItem.NAME]}}">
+  <div [formGroup]="changeHeroForm">
+    <div class="dx-field">
+      <div class="dx-field-label">
+        Имя
+      </div>
+      <div class="dx-field-value">
+        <dx-text-box [showClearButton]="true"
+                     formControlName="name"
+                     text="{{currentHero[LItem.NAME]}}"
+                     [isValid] = '!(changeHeroForm.controls[LItem.NAME].invalid && (changeHeroForm.controls[LItem.NAME].dirty || changeHeroForm.controls[LItem.NAME].touched))'
+
+        ></dx-text-box>
+      </div>
+    </div>
+    <div class="dx-field">
+      <div class="dx-field-label">
+        Сила
+      </div>
+      <div class="dx-field-value">
+        <dx-text-box [showClearButton]="true"
+                     formControlName="power"
+                     text="{{ currentHero[LHero.POWER] }}"
+                     [isValid] = '!(changeHeroForm.controls[LHero.POWER].invalid && (changeHeroForm.controls[LHero.POWER].dirty || changeHeroForm.controls[LHero.POWER].touched))'
+
+        ></dx-text-box>
+      </div>
+    </div>
+    <div class="dx-field">
+      <div class="dx-field-label">
+        Способности
+      </div>
+      <div class="dx-field-value">
+        <dx-tag-box [dataSource]="skills$ | async"
+                    [value]="currentHero[LHero.SKILLS]"
+                    [showSelectionControls]="true"
+                    valueExpr="name"
+                    displayExpr="name"
+                    formControlName="skills"
+                    [isValid] = '!(changeHeroForm.controls[LHero.SKILLS].invalid && (changeHeroForm.controls[LHero.SKILLS].dirty || changeHeroForm.controls[LHero.SKILLS].touched))'
+        ></dx-tag-box>
+      </div>
+    </div>
+    <div class="dx-field">
+      <div class="dx-field-label">Начальный уровень</div>
+      <div class="dx-field-value">
+        <dx-text-box [showClearButton]="true"
+                     formControlName="level"
+                     text="{{ currentHero[LHero.LEVEL] }}"
+                     [isValid] = '!(changeHeroForm.controls[LHero.LEVEL].invalid && (changeHeroForm.controls[LHero.LEVEL].dirty || changeHeroForm.controls[LHero.LEVEL].touched))'
+        ></dx-text-box>
+      </div>
+    </div>
+    <dx-button (click)='changeHero(currentHero[LItem.ID]!)'
+               text="Редактировать героя"
+               type="submit"
+    ></dx-button>
+  </div>
+</dx-popup>

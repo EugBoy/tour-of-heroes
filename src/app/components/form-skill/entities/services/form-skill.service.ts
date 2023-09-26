@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup } from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { AppService } from "../../../../entities/services/app.service";
 import {LItem} from "../../../form-hero/entities/enums/item.enum";
 
@@ -17,7 +17,7 @@ export class FormSkillService {
    */
   public getForm(): FormGroup{
     return this._formBuilder.group({
-    [LItem.NAME]:''
+    [LItem.NAME]:['', Validators.minLength(2)]
     })
   }
 

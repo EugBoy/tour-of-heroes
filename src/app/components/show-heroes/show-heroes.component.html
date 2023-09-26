@@ -13,8 +13,7 @@
             От:
           </div>
           <div class="dx-field-value">
-            <dx-text-box [inputAttr]="{ 'aria-label': 'Name' }"
-                         [showClearButton]="true"
+            <dx-text-box [showClearButton]="true"
                          formControlName="levelDown"
                          width="80px">
               <dx-validator>
@@ -30,8 +29,7 @@
             До:
           </div>
           <div class="dx-field-value">
-            <dx-text-box [inputAttr]="{ 'aria-label': 'Name' }"
-                         [showClearButton]="true"
+            <dx-text-box [showClearButton]="true"
                          formControlName="levelUp"
                          width="80px">
               <dx-validator>
@@ -88,6 +86,7 @@
 </div>
 <dx-accordion itemTemplate="item"
               itemTitleTemplate="title"
+              noDataText="Нет данных с сервера, проверьте подключение"
               [dataSource]="heroes$ | async | filterHeroes: this.filterHeroesForm.controls['sort'].value! : this.filterHeroesForm.controls['levelDown'].value! : this.filterHeroesForm.controls['levelUp'].value! : this.filterHeroesForm.controls['name'].value! : this.filterHeroesForm.controls['skills'].value! "
               [collapsible]="true"
               class="show-heroes">
@@ -115,12 +114,12 @@
     </div>
     <dx-button class="button-info"
                text="Редактировать"
-               (click) = "togglePopup(hero)"
+               (click)="openEditHeroPopup(hero)"
     ></dx-button>
-    <app-popup [currentHero]="hero"
-               [currentId]= "hero[LItem.ID]"
-               [isPopupVisible]="isPopupVisible"
-    ></app-popup>
   </div>
 </dx-accordion>
 
+<app-popup *ngIf="isPopupVisible"
+           [currentHero]="currentHero"
+           [(isPopupVisible)]="isPopupVisible"
+></app-popup>

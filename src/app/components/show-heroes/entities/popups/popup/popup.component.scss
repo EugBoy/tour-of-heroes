@@ -3,10 +3,8 @@ $button-color: white;
 $bg-color: #d3d3d3;
 $shadow-color: #7e7575;
 
-
 @mixin input-area{
   box-shadow: 1px 1px 1px $shadow-color;
-;
   margin-bottom: 10px;
 }
 
@@ -15,43 +13,28 @@ $shadow-color: #7e7575;
   flex-direction: row;
 }
 
-.filters{
-  display: flex;
-  flex-direction: row;
-  width: 340px;
-}
-
-.filters-label {
-  width: 100px;
-  margin-right: 124px;
-}
-
 .level-filter{
-  display: flex;
+  @include flex-row;
+  justify-content: space-between;
 }
 .filter-label{
   width: 100px;
   height: 30px;
-  margin-right: -7px;
 }
-
 .dx-field{
   @include flex-row;
+  margin-bottom: 15px;
 }
-
 .filter{
   @include flex-row;
 }
-
 .show-heroes{
   margin-top: 100px;
 }
-
 .hero-title {
   @include flex-row;
   justify-content: space-between;
 }
-
 .skills {
   display: flex;
   flex-wrap: wrap;
@@ -66,7 +49,6 @@ $shadow-color: #7e7575;
     background-color: $bg-color;
   }
 }
-
 .hero-info{
   display: flex;
   justify-content: space-between;
@@ -79,15 +61,19 @@ $shadow-color: #7e7575;
   }
 }
 
-.hero-info-card{
-  display: flex;
-  flex-direction: column;
-}
-
 dx-tag-box{
   @include input-area
 }
 
 dx-text-box{
   @include input-area
+}
+
+.hero-info-card{
+  display: flex;
+  flex-direction: column;
+}
+.dx-button{
+  background-color: #509127;
+  color: white;
 }

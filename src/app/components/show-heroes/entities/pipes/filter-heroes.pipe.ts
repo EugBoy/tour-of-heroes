@@ -25,16 +25,15 @@ export class FilterHeroesPipe implements PipeTransform {
       })
     }
     if(levelDown){
-      heroes = heroes!.filter((hero: HeroApi): boolean => {
-        return hero[LHero.LEVEL] >= levelDown
+      heroes = heroes.filter((hero: HeroApi): boolean => {
+        return Number(hero[LHero.LEVEL]) >= levelDown
       })
     }
     if(levelUp){
       heroes = heroes!.filter((hero: HeroApi): boolean => {
-        return hero[LHero.LEVEL] <= levelUp
+        return Number(hero[LHero.LEVEL]) <= levelUp
       })
     }
-
     if (name){
       heroes = heroes!.filter((hero: HeroApi) => {
         return hero[LItem.NAME].includes(name)

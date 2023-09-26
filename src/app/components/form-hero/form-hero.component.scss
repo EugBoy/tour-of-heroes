@@ -1,7 +1,12 @@
+$shadow-color: #7e7575;
 @mixin form{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+@mixin input-area{
+  box-shadow: 1px 1px 1px $shadow-color;
+  margin-bottom: 10px;
 }
 .dx-field {
   display: flex;
@@ -13,5 +18,11 @@
 .form-new-skill{
   @include form;
   height: 130px;
-
 }
+dx-text-box {
+  @include input-area
+}
+dx-tag-box {
+  @include input-area
+}
+

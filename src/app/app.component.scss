@@ -1,4 +1,4 @@
-$bg-color: #d3d3d3;
+$bg-color: #45b7ea;
 @mixin df {
   display: flex;
   flex-direction: column;
@@ -21,8 +21,9 @@ $bg-color: #d3d3d3;
   height: 500px;
   @include form-dis;
   margin-right: 15px;
+  border-radius: 15px;
+  padding-top: 20px;
 }
-
 .form-hero{
   width: 400px;
   height: 350px;
@@ -37,6 +38,7 @@ $bg-color: #d3d3d3;
 .show-heroes{
   width: 600px;
   min-height: 350px;
+  border-radius: 15px;
   @include form-dis
 }
 

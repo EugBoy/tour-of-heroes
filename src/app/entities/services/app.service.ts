@@ -1,9 +1,9 @@
-import {OnInit, DestroyRef, Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, tap} from "rxjs";
-import { HeroApi } from "../../components/form-hero/entities/interfaces/hero.interface";
-import { ItemApi } from "../../components/form-hero/entities/interfaces/item.interface";
-import { LItem } from "../../components/form-hero/entities/enums/item.enum";
-import { HttpClient } from "@angular/common/http";
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, lastValueFrom, Observable, tap} from "rxjs";
+import {HeroApi} from "../../components/form-hero/entities/interfaces/hero.interface";
+import {ItemApi} from "../../components/form-hero/entities/interfaces/item.interface";
+import {LItem} from "../../components/form-hero/entities/enums/item.enum";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +17,7 @@ export class AppService{
   public skills$: Observable<ItemApi[]> = this._skills$$.asObservable();
 
   constructor(
-    private readonly http: HttpClient,
-    private readonly _destroyRef: DestroyRef) {
+    private readonly http: HttpClient) {
   }
 
   /**
@@ -38,9 +37,13 @@ export class AppService{
    *@param {HeroApi} hero - данные о герое.
    */
    public addHero (hero: HeroApi){
-     this.http.post<HeroApi>('http://127.0.0.1:3000/items', hero)
-      .subscribe();
-    this.getHeroes()
+     lastValueFrom(this.http.post<HeroApi>('http://127.0.0.1:3000/items', hero))
+       .then(
+         this.getHeroes()
+       ).catch(() => {
+         alert('Нет связи с сервером')
+       }
+     )
   }
 
   /**
@@ -49,13 +52,17 @@ export class AppService{
    * @param {HeroApi} changedHero - данные изменившегося героя
    */
   public changeHero(changedHero: HeroApi){
-    this.http.put('http://127.0.0.1:3000/items/'+changedHero[LItem.ID], changedHero)
-      .subscribe();
-    this.getHeroes()
-
+    lastValueFrom(this.http.put('http://127.0.0.1:3000/items/'+changedHero[LItem.ID], changedHero))
+      .then(
+        this.getHeroes()
+      ).catch(() => {
+      alert('Нет связи с сервером')
+      }
+    )
   }
 
   /**
+   * Метод создания нового навыка
    *
    * @param {[ItemApi.NAME]} skill - имя нового навыка
    */
@@ -67,6 +74,10 @@ export class AppService{
       ...skill,
       [LItem.ID]: skillID
     }
-    this._skills$$.next([...skills, newSkill])
+    try {
+      this._skills$$.next([...skills, newSkill])
+    } catch {
+      alert('Произошла ошибка, попробуйте ещё раз.')
+    }
   }
 }

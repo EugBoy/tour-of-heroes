@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ItemApi} from "./entities/interfaces/item.interface";
 import {FormGroup} from '@angular/forms'
 import {AppService} from "../../entities/services/app.service";
 import {Observable} from "rxjs";
 import {FormHeroService} from "./entities/services/form-hero.service"
 import {LItem} from "./entities/enums/item.enum";
+import {LHero} from "./entities/enums/hero.enum";
 
 @Component({
   selector: 'app-form-hero',
@@ -28,6 +29,6 @@ export class FormHeroComponent {
     this._formHeroService.addHero(this.heroForm)
   }
 
-  protected readonly alert = alert;
   protected readonly LItem = LItem;
+  protected readonly LHero = LHero;
 }

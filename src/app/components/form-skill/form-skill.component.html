@@ -4,10 +4,10 @@
       Новая способность
     </div>
     <div class="dx-field-value">
-      <dx-text-box [inputAttr]="{ 'aria-label': 'Name' }"
-                   [showClearButton]="true"
+      <dx-text-box [showClearButton]="true"
                    formControlName="name"
                    width="150px"
+                   [isValid] = '!(skillForm.controls[LItem.NAME].invalid && (skillForm.controls[LItem.NAME].dirty || skillForm.controls[LItem.NAME].touched))'
       ></dx-text-box>
     </div>
     <dx-button (click) = 'addSkill()'

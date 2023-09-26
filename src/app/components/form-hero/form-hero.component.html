@@ -5,9 +5,9 @@
         Имя
       </div>
       <div class="dx-field-value">
-        <dx-text-box [inputAttr]="{ 'aria-label': 'Name' }"
-                     [showClearButton]="true"
+        <dx-text-box [showClearButton]="true"
                      formControlName="name"
+                     [isValid] = '!(heroForm.controls[LItem.NAME].invalid && (heroForm.controls[LItem.NAME].dirty || heroForm.controls[LItem.NAME].touched))'
         ></dx-text-box>
       </div>
     </div>
@@ -16,9 +16,9 @@
         Сила
       </div>
       <div class="dx-field-value">
-        <dx-text-box [inputAttr]="{ 'aria-label': 'Name' }"
-                     [showClearButton]="true"
+        <dx-text-box [showClearButton]="true"
                      formControlName="power"
+                     [isValid] = '!(heroForm.controls[LHero.POWER].invalid && (heroForm.controls[LHero.POWER].dirty || heroForm.controls[LHero.POWER].touched))'
         ></dx-text-box>
       </div>
     </div>
@@ -31,6 +31,7 @@
                     valueExpr="name"
                     displayExpr="name"
                     formControlName="skills"
+                    [isValid] = '!(heroForm.controls[LHero.SKILLS].invalid && (heroForm.controls[LHero.SKILLS].dirty || heroForm.controls[LHero.SKILLS].touched))'
         ></dx-tag-box>
       </div>
     </div>
@@ -39,9 +40,9 @@
         Начальный уровень
       </div>
       <div class="dx-field-value">
-        <dx-text-box [inputAttr]="{ 'aria-label': 'Name' }"
-                     [showClearButton]="true"
+        <dx-text-box [showClearButton]="true"
                      formControlName="level"
+                     [isValid] = '!(heroForm.controls[LHero.LEVEL].invalid && (heroForm.controls[LHero.LEVEL].dirty || heroForm.controls[LHero.LEVEL].touched))'
         ></dx-text-box>
       </div>
     </div>
