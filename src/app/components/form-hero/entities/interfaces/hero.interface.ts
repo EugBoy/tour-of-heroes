@@ -1,5 +1,5 @@
-import { LHero } from "../enums/hero.enum";
-import { ItemApi } from "./item.interface";
+import {LHero} from "../labels/hero.label";
+import {IItem} from "./item.interface";
 
 /**
  * Интерфейс данных о герое
@@ -7,9 +7,9 @@ import { ItemApi } from "./item.interface";
  * @param {number} POWER - сила героя
  * @param {string[]} SKILLS - навыки героя
  * @param {number} LEVEL - уровень героя
- * @implements ItemApi
+ * @extends IItem
  */
-export interface HeroApi extends ItemApi{
+export interface IHero extends IItem {
   [LHero.POWER] : number;
   [LHero.SKILLS] : string[];
   [LHero.LEVEL] : number;

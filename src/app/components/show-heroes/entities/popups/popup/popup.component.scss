@@ -1,79 +1,64 @@
-$bg-button-color: #031369;
-$button-color: white;
-$bg-color: #d3d3d3;
-$shadow-color: #7e7575;
+@import "../../../../../../assets/styles/mixins";
 
-@mixin input-area{
-  box-shadow: 1px 1px 1px $shadow-color;
-  margin-bottom: 10px;
-}
+:host {
 
-@mixin flex-row {
-  display: flex;
-  flex-direction: row;
-}
-
-.level-filter{
-  @include flex-row;
-  justify-content: space-between;
-}
-.filter-label{
-  width: 100px;
-  height: 30px;
-}
-.dx-field{
-  @include flex-row;
-  margin-bottom: 15px;
-}
-.filter{
-  @include flex-row;
-}
-.show-heroes{
-  margin-top: 100px;
-}
-.hero-title {
-  @include flex-row;
-  justify-content: space-between;
-}
-.skills {
-  display: flex;
-  flex-wrap: wrap;
-  width: 350px;
-  min-height: 50px;
-  margin-top: 10px;
-  div {
-    margin-right: 5px;
-    margin-top: 5px;
-    height: 25px;
-    padding: 3px;
-    background-color: $bg-color;
+  .level-filter{
+    @include flex-row;
+    justify-content: space-between;
   }
-}
-.hero-info{
-  display: flex;
-  justify-content: space-between;
-  min-height: 70px;
-  dx-button{
-    width: 150px;
-    height: 40px;
-    background-color: $bg-button-color;
+
+  .filter-label{
+    width: 100px;
+    height: 30px;
+  }
+
+  .dx-field{
+    @include flex-row;
+    margin-bottom: 15px;
+  }
+
+  .filter{
+    @include flex-row;
+  }
+
+  .show-heroes{
+    margin-top: 100px;
+  }
+
+  .hero-title {
+    @include flex-row;
+    justify-content: space-between;
+  }
+
+  .hero-info{
+    display: flex;
+    justify-content: space-between;
+    min-height: 70px;
+
+    dx-button{
+      width: 150px;
+      height: 40px;
+      background-color: $bg-button-color;
+      color: $button-color;
+    }
+  }
+
+  dx-tag-box{
+    @include input-area
+  }
+
+  dx-text-box{
+    @include input-area
+  }
+
+  .hero-info-card{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dx-button{
+    background-color: $bg-popup-button-color;
     color: $button-color;
   }
-}
 
-dx-tag-box{
-  @include input-area
-}
-
-dx-text-box{
-  @include input-area
-}
-
-.hero-info-card{
-  display: flex;
-  flex-direction: column;
-}
-.dx-button{
-  background-color: #509127;
-  color: white;
 }

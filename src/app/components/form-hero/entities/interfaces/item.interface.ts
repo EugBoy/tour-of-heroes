@@ -1,12 +1,12 @@
-import { LItem } from "../enums/item.enum";
+import {LItem} from "../labels/item.label";
 
 /**
- * Интерфейс данных о объекта
+ * Интерфейс данных об объекте
  *
  * @param {number} ID - идентификатор объекта
  * @param {string} NAME - название объекта
  */
-export interface ItemApi {
+export interface IItem {
   [LItem.ID]? : number;
   [LItem.NAME] : string;
 }

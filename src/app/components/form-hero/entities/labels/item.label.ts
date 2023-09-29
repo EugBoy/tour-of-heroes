@@ -1,4 +1,4 @@
-export enum SkillLabels {
+export enum LItem {
   ID = 'id',
   NAME ='name',
 }

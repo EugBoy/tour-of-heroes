@@ -6,7 +6,7 @@ import {
   DxTextBoxModule,
   DxTagBoxModule,
   DxAccordionModule,
-  DxCheckBoxModule, DxPopupModule
+  DxPopupModule
 } from "devextreme-angular";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
@@ -18,6 +18,7 @@ import { ShowHeroesComponent } from './components/show-heroes/show-heroes.compon
 import { FilterHeroesPipe } from './components/show-heroes/entities/pipes/filter-heroes.pipe';
 import { PopupComponent} from "./components/show-heroes/entities/popups/popup/popup.component";
 import { FormSkillComponent } from './components/form-skill/form-skill.component';
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -38,9 +39,9 @@ import { FormSkillComponent } from './components/form-skill/form-skill.component
         DxValidatorModule,
         DxAccordionModule,
         HttpClientModule,
-        DxCheckBoxModule,
         DxPopupModule,
-        FormsModule
+        FormsModule,
+        NgOptimizedImage
     ],
   providers: [],
   bootstrap: [AppComponent]

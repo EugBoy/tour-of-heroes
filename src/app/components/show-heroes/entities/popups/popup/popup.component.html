@@ -3,18 +3,17 @@
           [visible]="true"
           [hideOnOutsideClick]="true"
           (onHidden)="close()"
-          title="Редактирование персонажа {{currentHero[LItem.NAME]}}">
-  <div [formGroup]="changeHeroForm">
+          title="Редактирование персонажа {{ currentHero[LItem.NAME] }}">
+  <div>
     <div class="dx-field">
       <div class="dx-field-label">
         Имя
       </div>
       <div class="dx-field-value">
         <dx-text-box [showClearButton]="true"
-                     formControlName="name"
-                     text="{{currentHero[LItem.NAME]}}"
-                     [isValid] = '!(changeHeroForm.controls[LItem.NAME].invalid && (changeHeroForm.controls[LItem.NAME].dirty || changeHeroForm.controls[LItem.NAME].touched))'
-
+                     [formControl]="nameControl"
+                     [isValid] = '!(nameControl.invalid && (nameControl.dirty || nameControl.touched))'
+                     text="{{ currentHero[LItem.NAME] }}"
         ></dx-text-box>
       </div>
     </div>
@@ -24,10 +23,9 @@
       </div>
       <div class="dx-field-value">
         <dx-text-box [showClearButton]="true"
-                     formControlName="power"
+                     [formControl]="powerControl"
+                     [isValid] = '!(powerControl.invalid && (powerControl.dirty || powerControl.touched))'
                      text="{{ currentHero[LHero.POWER] }}"
-                     [isValid] = '!(changeHeroForm.controls[LHero.POWER].invalid && (changeHeroForm.controls[LHero.POWER].dirty || changeHeroForm.controls[LHero.POWER].touched))'
-
         ></dx-text-box>
       </div>
     </div>
@@ -39,10 +37,10 @@
         <dx-tag-box [dataSource]="skills$ | async"
                     [value]="currentHero[LHero.SKILLS]"
                     [showSelectionControls]="true"
+                    [isValid] = '!(skillsControl.invalid && (skillsControl.dirty || skillsControl.touched))'
+                    [formControl]="skillsControl"
                     valueExpr="name"
                     displayExpr="name"
-                    formControlName="skills"
-                    [isValid] = '!(changeHeroForm.controls[LHero.SKILLS].invalid && (changeHeroForm.controls[LHero.SKILLS].dirty || changeHeroForm.controls[LHero.SKILLS].touched))'
         ></dx-tag-box>
       </div>
     </div>
@@ -50,15 +48,14 @@
       <div class="dx-field-label">Начальный уровень</div>
       <div class="dx-field-value">
         <dx-text-box [showClearButton]="true"
-                     formControlName="level"
+                     [formControl]="levelControl"
+                     [isValid] = '!(levelControl.invalid && (levelControl.dirty || levelControl.touched))'
                      text="{{ currentHero[LHero.LEVEL] }}"
-                     [isValid] = '!(changeHeroForm.controls[LHero.LEVEL].invalid && (changeHeroForm.controls[LHero.LEVEL].dirty || changeHeroForm.controls[LHero.LEVEL].touched))'
         ></dx-text-box>
       </div>
     </div>
-    <dx-button (click)='changeHero(currentHero[LItem.ID]!)'
-               text="Редактировать героя"
-               type="submit"
+    <dx-button (click)='changeHero(changeHeroForm, currentHero[LItem.ID]!)'
+                text="Редактировать героя"
     ></dx-button>
   </div>
 </dx-popup>

@@ -1,11 +1,12 @@
 import {Component} from '@angular/core';
-import {ItemApi} from "./entities/interfaces/item.interface";
-import {FormGroup} from '@angular/forms'
+import {FormControl, FormGroup} from '@angular/forms'
 import {AppService} from "../../entities/services/app.service";
 import {Observable} from "rxjs";
-import {FormHeroService} from "./entities/services/form-hero.service"
-import {LItem} from "./entities/enums/item.enum";
-import {LHero} from "./entities/enums/hero.enum";
+import {HeroFormBuildService} from "./entities/services/hero-form-build.service"
+import {LItem} from "./entities/labels/item.label";
+import {LHero} from "./entities/labels/hero.label";
+import {IHero} from "./entities/interfaces/hero.interface";
+import {IItem} from "./entities/interfaces/item.interface";
 
 @Component({
   selector: 'app-form-hero',
@@ -14,21 +15,48 @@ import {LHero} from "./entities/enums/hero.enum";
 })
 export class FormHeroComponent {
 
-  public skills$: Observable<ItemApi[]> = this._appService.skills$;
-  public heroForm: FormGroup = this._formHeroService.getForm();
+  public heroForm: FormGroup = this._heroFormBuildService.getHeroForm();
 
-  constructor(
+  public skills$: Observable<IItem[]> = this._appService.skills$;
+
+  public LItem: typeof LItem = LItem;
+  public LHero: typeof LHero = LHero;
+
+  constructor (
     private readonly _appService: AppService,
-    private readonly _formHeroService: FormHeroService) {
+    private readonly _heroFormBuildService: HeroFormBuildService
+  ) {
   }
 
   /**
-   * Метод обращения к FormHeroService для добавления нового героя
+   * Метод добавления нового героя
+   *
+   * @param {FormGroup} heroForm - форма, в которую вводят данные нового героя
    */
-  public addHero(){
-    this._formHeroService.addHero(this.heroForm)
+  public addHero(heroForm: FormGroup){
+    let hero: IHero = heroForm.getRawValue();
+    if (heroForm.valid){
+      this._appService.addHero(hero);
+      heroForm.reset();
+    }
+    else {
+      alert('При заполнении формы допущена ошибка!');
+    }
   }
 
-  protected readonly LItem = LItem;
-  protected readonly LHero = LHero;
+  public get nameControl(): FormControl {
+    return this.heroForm.get([LItem.NAME]) as FormControl
+  };
+
+  public get powerControl(): FormControl {
+    return this.heroForm.get([LHero.POWER]) as FormControl
+  }
+
+  public get skillsControl(): FormControl {
+    return this.heroForm.get([LHero.SKILLS]) as FormControl
+  }
+
+  public get levelControl(): FormControl {
+    return this.heroForm.get([LHero.LEVEL]) as FormControl
+  }
 }

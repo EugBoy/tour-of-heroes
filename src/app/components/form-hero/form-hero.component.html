@@ -1,13 +1,12 @@
-<div [formGroup]="heroForm"
-     class="form-new-hero">
+<div class="form-new-hero">
     <div class="dx-field">
       <div class="dx-field-label">
         Имя
       </div>
       <div class="dx-field-value">
         <dx-text-box [showClearButton]="true"
-                     formControlName="name"
-                     [isValid] = '!(heroForm.controls[LItem.NAME].invalid && (heroForm.controls[LItem.NAME].dirty || heroForm.controls[LItem.NAME].touched))'
+                     [formControl]="nameControl"
+                     [isValid] = '!(nameControl.invalid && (nameControl.dirty || nameControl.touched))'
         ></dx-text-box>
       </div>
     </div>
@@ -17,8 +16,8 @@
       </div>
       <div class="dx-field-value">
         <dx-text-box [showClearButton]="true"
-                     formControlName="power"
-                     [isValid] = '!(heroForm.controls[LHero.POWER].invalid && (heroForm.controls[LHero.POWER].dirty || heroForm.controls[LHero.POWER].touched))'
+                     [formControl]="powerControl"
+                     [isValid] = '!(powerControl.invalid && (powerControl.dirty || powerControl.touched))'
         ></dx-text-box>
       </div>
     </div>
@@ -28,10 +27,10 @@
       </div>
       <div class="dx-field-value">
         <dx-tag-box [dataSource]=" skills$ | async"
+                    [formControl]="skillsControl"
+                    [isValid] = '!(skillsControl.invalid && (skillsControl.dirty || skillsControl.touched))'
                     valueExpr="name"
                     displayExpr="name"
-                    formControlName="skills"
-                    [isValid] = '!(heroForm.controls[LHero.SKILLS].invalid && (heroForm.controls[LHero.SKILLS].dirty || heroForm.controls[LHero.SKILLS].touched))'
         ></dx-tag-box>
       </div>
     </div>
@@ -41,14 +40,13 @@
       </div>
       <div class="dx-field-value">
         <dx-text-box [showClearButton]="true"
-                     formControlName="level"
-                     [isValid] = '!(heroForm.controls[LHero.LEVEL].invalid && (heroForm.controls[LHero.LEVEL].dirty || heroForm.controls[LHero.LEVEL].touched))'
+                     [formControl]="levelControl"
+                     [isValid] = '!(levelControl.invalid && (levelControl.dirty || levelControl.touched))'
         ></dx-text-box>
       </div>
     </div>
-    <dx-button (click)="addHero()"
+    <dx-button (click)="addHero(heroForm)"
                text="Добавить героя"
-               type="submit"
     ></dx-button>
 </div>
 

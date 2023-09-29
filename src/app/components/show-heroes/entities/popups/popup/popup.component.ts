@@ -1,47 +1,58 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Observable} from "rxjs";
-import {ItemApi} from "../../../../form-hero/entities/interfaces/item.interface";
-import {FormGroup} from "@angular/forms";
+import {IItem} from "../../../../form-hero/entities/interfaces/item.interface";
+import {FormControl, FormGroup} from "@angular/forms";
 import {AppService} from "../../../../../entities/services/app.service";
-import {PopupService} from "./entities/services/popup.service";
-import {HeroApi} from "../../../../form-hero/entities/interfaces/hero.interface";
-import {LItem} from "../../../../form-hero/entities/enums/item.enum";
-import {LHero} from "../../../../form-hero/entities/enums/hero.enum";
+import {PopupHeroFormService} from "./entities/services/popup-hero-form.service";
+import {IHero} from "../../../../form-hero/entities/interfaces/hero.interface";
+import {LItem} from "../../../../form-hero/entities/labels/item.label";
+import {LHero} from "../../../../form-hero/entities/labels/hero.label";
 
 @Component({
   selector: 'app-popup',
   templateUrl: './popup.component.html',
   styleUrls: ['./popup.component.scss']
 })
-export class PopupComponent implements OnInit{
+export class PopupComponent implements OnInit {
 
-  @Input() public currentHero: HeroApi = <HeroApi>{};
-  @Input() public isPopupVisible: boolean = false;
-  @Output() public isPopupVisibleChange: EventEmitter<false> = new EventEmitter<false>();
+  @Input()
+  public currentHero: IHero = <IHero>{};
 
-  public skills$: Observable<ItemApi[]> = this._appService.skills$;
-  public changeHeroForm: FormGroup = this._popupService.getForm();
+  @Input()
+  public isPopupVisible: boolean = false;
+
+  @Output()
+  public isPopupVisibleChange: EventEmitter<false> = new EventEmitter<false>();
+
+  public skills$: Observable<IItem[]> = this._appService.skills$;
+  public changeHeroForm: FormGroup = this._popupHeroFormService.getChangeHeroForm();
+
+  public LHero: typeof LHero = LHero;
+  public LItem: typeof LItem = LItem;
 
   constructor(
-    public readonly _appService : AppService,
-    private readonly _popupService: PopupService) {
+    private readonly _appService : AppService,
+    private readonly _popupHeroFormService: PopupHeroFormService) {
   }
 
   public ngOnInit(): void {
-    this.changeHeroForm.get([LItem.NAME])!.setValue(this.currentHero[LItem.NAME]);
-    this.changeHeroForm.get([LHero.POWER])!.setValue(this.currentHero[LHero.POWER]);
-    this.changeHeroForm.get([LHero.SKILLS])!.setValue(this.currentHero[LHero.SKILLS]);
-    this.changeHeroForm.get([LHero.LEVEL])!.setValue(this.currentHero[LHero.LEVEL]);
+    this.changeHeroForm.patchValue(this.currentHero)
   }
 
   /**
    * Метод изменения данных о героя
    *
-   * @param id {number} - id изменяемого героя.
+   * @param {FormGroup} changeHeroForm - форма с изменёнными данными героя
+   * @param {[LItem.ID]} id - id изменяемого героя
    */
-  public changeHero(id: number): void{
-    this._popupService.changeHero(this.changeHeroForm, id);
-    this.close()
+  public changeHero(changeHeroForm: FormGroup, id: number): void{
+    let changedHero: IHero = {... changeHeroForm.getRawValue(), [LItem.ID]:id}
+    if (changeHeroForm.valid){
+      this._appService.changeHero(changedHero);
+      this.close();
+    } else {
+      alert('При заполнении формы допущена ошибка');
+    }
   }
 
   /**
@@ -51,6 +62,19 @@ export class PopupComponent implements OnInit{
     this.isPopupVisibleChange.emit(false);
   }
 
-  protected readonly LItem = LItem;
-  protected readonly LHero = LHero;
+  public get nameControl(): FormControl {
+    return this.changeHeroForm.get([LItem.NAME]) as FormControl
+  }
+
+  public get powerControl(): FormControl {
+    return this.changeHeroForm.get([LHero.POWER]) as FormControl
+  }
+
+  public get skillsControl(): FormControl {
+    return this.changeHeroForm.get([LHero.SKILLS]) as FormControl
+  }
+
+  public get levelControl(): FormControl {
+    return this.changeHeroForm.get([LHero.LEVEL]) as FormControl
+  }
 }

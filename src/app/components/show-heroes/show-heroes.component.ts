@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
 import {AppService} from "../../entities/services/app.service";
-import {FormGroup} from "@angular/forms";
-import {LHero} from "../form-hero/entities/enums/hero.enum";
-import {LItem} from "../form-hero/entities/enums/item.enum";
-import {HeroApi} from "../form-hero/entities/interfaces/hero.interface";
-import {ItemApi} from "../form-hero/entities/interfaces/item.interface";
-import {FilterHeroesService} from "./entities/services/filter-heroes.service";
+import {FormControl, FormGroup} from "@angular/forms";
+import {LHero} from "../form-hero/entities/labels/hero.label";
+import {LItem} from "../form-hero/entities/labels/item.label";
+import {IHero} from "../form-hero/entities/interfaces/hero.interface";
+import {IItem} from "../form-hero/entities/interfaces/item.interface";
+import {HeroesFilterFormService} from "./entities/services/heroes-filter-form.service";
 
 @Component({
   selector: 'app-show-heroes',
@@ -16,15 +16,21 @@ import {FilterHeroesService} from "./entities/services/filter-heroes.service";
 
 export class ShowHeroesComponent implements OnInit {
 
-  public skills$: Observable<ItemApi[]> = this._appService.skills$;
-  public heroes$: Observable<HeroApi[]> = this._appService.heroes$;
-  public filterHeroesForm: FormGroup = this._filterHeroesService.getForm();
-  public currentHero: HeroApi = <HeroApi>{};
-  public isPopupVisible: boolean = false;
+  public heroesFilterForm: FormGroup = this._heroesFilterFormService.getFilterForm();
 
-  constructor(
-    public readonly _appService : AppService,
-    private readonly _filterHeroesService: FilterHeroesService,
+  public skills$: Observable<IItem[]> = this._appService.skills$;
+  public heroes$: Observable<IHero[]> = this._appService.heroes$;
+
+  public currentHero: IHero = <IHero>{};
+  public isPopupVisible: boolean = false;
+  public sortStatus: number = 0;
+
+  public LHero: typeof LHero = LHero;
+  public LItem: typeof LItem = LItem;
+
+  constructor (
+    private readonly _appService : AppService,
+    private readonly _heroesFilterFormService: HeroesFilterFormService,
   ) {
   }
 
@@ -35,13 +41,31 @@ export class ShowHeroesComponent implements OnInit {
   /**
    * Метод открытия popup.
    *
-   * @param hero {HeroApi} - герой, данные которого нужно отредактировать
+   * @param hero {IHero} - герой, данные которого нужно отредактировать
    */
-  public openEditHeroPopup(hero: HeroApi): void {
+  public openEditHeroPopup(hero: IHero): void {
     this.currentHero = hero;
     this.isPopupVisible = true;
   }
 
-  protected readonly LItem = LItem;
-  protected readonly LHero = LHero;
+  public sortHeroes(): void {
+    this.sortStatus += 1;
+  }
+
+  public get levelDownControl(): FormControl {
+    return this.heroesFilterForm.get('levelDown') as FormControl
+  }
+
+  public get levelUpControl(): FormControl {
+    return this.heroesFilterForm.get('levelUp') as FormControl
+  }
+
+  public get skillsControl(): FormControl {
+    return this.heroesFilterForm.get('skills') as FormControl
+  }
+
+  public get nameControl(): FormControl {
+    return this.heroesFilterForm.get('name') as FormControl
+  }
+
 }

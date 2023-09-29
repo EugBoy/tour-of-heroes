@@ -1,0 +1,42 @@
+$bg-color: #45b7ea;
+$shadow-color: #7e7575;
+$bg-button-color: #031369;
+$button-color: white;
+$bg-popup-button-color: #509127;
+
+@mixin input-area {
+  box-shadow: 1px 1px 1px $shadow-color;
+  margin-bottom: 10px;
+}
+
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+
+@mixin df {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin form-dis {
+  background-color: $bg-color;
+  padding: 15px;
+}
+
+@mixin form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@mixin input-area {
+  box-shadow: 1px 1px 1px $shadow-color;
+  margin-bottom: 10px;
+}
