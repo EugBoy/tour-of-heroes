@@ -6,8 +6,7 @@
       <div class="dx-field-value">
         <dx-text-box [showClearButton]="true"
                      [formControl]="nameControl"
-                     [isValid] = '!(nameControl.invalid && (nameControl.dirty || nameControl.touched))'
-        ></dx-text-box>
+                     [isValid]="!(nameControl.invalid && (nameControl.dirty || nameControl.touched))"/>
       </div>
     </div>
     <div class="dx-field">
@@ -17,8 +16,7 @@
       <div class="dx-field-value">
         <dx-text-box [showClearButton]="true"
                      [formControl]="powerControl"
-                     [isValid] = '!(powerControl.invalid && (powerControl.dirty || powerControl.touched))'
-        ></dx-text-box>
+                     [isValid]="!(powerControl.invalid && (powerControl.dirty || powerControl.touched))"/>
       </div>
     </div>
     <div class="dx-field">
@@ -28,10 +26,9 @@
       <div class="dx-field-value">
         <dx-tag-box [dataSource]=" skills$ | async"
                     [formControl]="skillsControl"
-                    [isValid] = '!(skillsControl.invalid && (skillsControl.dirty || skillsControl.touched))'
+                    [isValid]="skillsControl.valid || skillsControl.untouched"
                     valueExpr="name"
-                    displayExpr="name"
-        ></dx-tag-box>
+                    displayExpr="name"/>
       </div>
     </div>
     <div class="dx-field">
@@ -41,13 +38,9 @@
       <div class="dx-field-value">
         <dx-text-box [showClearButton]="true"
                      [formControl]="levelControl"
-                     [isValid] = '!(levelControl.invalid && (levelControl.dirty || levelControl.touched))'
-        ></dx-text-box>
+                     [isValid]="!(levelControl.invalid && (levelControl.dirty || levelControl.touched))"/>
       </div>
     </div>
-    <dx-button (click)="addHero(heroForm)"
-               text="Добавить героя"
-    ></dx-button>
+    <dx-button (click)="addHero()"
+               text="Добавить героя"/>
 </div>
-
-

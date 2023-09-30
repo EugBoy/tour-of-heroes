@@ -1,64 +1,24 @@
 @import "../../../../../../assets/styles/mixins";
 
-:host {
+.dx-field{
+  @include flex-row;
+  margin-bottom: 15px;
+}
 
-  .level-filter{
-    @include flex-row;
-    justify-content: space-between;
+dx-tag-box{
+  @include input-area
+}
+
+dx-text-box{
+  @include input-area
+}
+
+dx-button{
+  background-color: $bg-popup-button-color;
+  color: $color-white;
+  margin-top: 30px;
+
+  &:hover {
+    background-color: $bg-color;
   }
-
-  .filter-label{
-    width: 100px;
-    height: 30px;
-  }
-
-  .dx-field{
-    @include flex-row;
-    margin-bottom: 15px;
-  }
-
-  .filter{
-    @include flex-row;
-  }
-
-  .show-heroes{
-    margin-top: 100px;
-  }
-
-  .hero-title {
-    @include flex-row;
-    justify-content: space-between;
-  }
-
-  .hero-info{
-    display: flex;
-    justify-content: space-between;
-    min-height: 70px;
-
-    dx-button{
-      width: 150px;
-      height: 40px;
-      background-color: $bg-button-color;
-      color: $button-color;
-    }
-  }
-
-  dx-tag-box{
-    @include input-area
-  }
-
-  dx-text-box{
-    @include input-area
-  }
-
-  .hero-info-card{
-    display: flex;
-    flex-direction: column;
-  }
-
-  .dx-button{
-    background-color: $bg-popup-button-color;
-    color: $button-color;
-  }
-
 }

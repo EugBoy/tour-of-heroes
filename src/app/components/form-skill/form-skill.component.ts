@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import {FormControl} from "@angular/forms";
-import {SkillFormBuildService} from "./entities/services/skill-form-build.service";
-import {LHero} from "../form-hero/entities/labels/hero.label";
-import {LItem} from "../form-hero/entities/labels/item.label";
+import {SkillFormBuilderService} from "./entities/services/skill-form-builder.service";
 import {AppService} from "../../entities/services/app.service";
 
 @Component({
@@ -12,28 +10,23 @@ import {AppService} from "../../entities/services/app.service";
 })
 export class FormSkillComponent {
 
-  public skillNameControl: FormControl = this._formSkillService.getSkillControl();
-
-  public LHero: typeof LHero = LHero;
-  public LItem: typeof LItem = LItem;
+  public skillNameControl: FormControl = this._skillFormBuilderService.skillControl;
 
   constructor (
     private readonly _appService: AppService,
-    private readonly _formSkillService: SkillFormBuildService
+    private readonly _skillFormBuilderService: SkillFormBuilderService,
   ) {
   }
 
   /**
-   * Метод добавления нового навыка
-   *
-   * @param {FormControl} skillNameControl - поле, в которое вводят имя нового навыка.
+   * Метод добавления нового навыка*
    */
-  public addSkill(skillNameControl: FormControl): void {
-    if (skillNameControl.valid){
-      this._appService.addSkill(skillNameControl.value);
-      skillNameControl.reset();
+  public addSkill(): void {
+    if (this.skillNameControl.valid){
+      this._appService.addSkill(this.skillNameControl.value);
+      this.skillNameControl.reset();
     } else {
       alert('Вы допустили ошибку.');
     }
-  }
+  };
 }

@@ -3,5 +3,3 @@ export enum LHero {
   SKILLS = 'skills',
   LEVEL = 'level',
 }
-
-

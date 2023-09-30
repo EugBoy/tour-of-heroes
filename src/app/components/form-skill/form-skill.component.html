@@ -6,14 +6,12 @@
     <div class="dx-field-value">
       <dx-text-box [showClearButton]="true"
                    [formControl]="skillNameControl"
-                   [isValid] = '!(skillNameControl.invalid && (skillNameControl.dirty || skillNameControl.touched))'
-                   width="150px"
-      ></dx-text-box>
+                   [isValid]="!(skillNameControl.invalid && (skillNameControl.dirty || skillNameControl.touched))"
+                   width="150px"/>
     </div>
-    <dx-button (click) = 'addSkill(skillNameControl)'
+    <dx-button (click)="addSkill()"
                text="Добавить способность"
                width="190px"
-               height="25px"
-    ></dx-button>
+               height="25px"/>
   </div>
 </div>

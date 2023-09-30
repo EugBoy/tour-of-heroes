@@ -4,10 +4,10 @@
 
   .app{
     display: flex;
-    //flex-direction: row;
     max-width: 1200px;
     min-height: 400px;
     flex-wrap: wrap;
+    gap: 20px;
   }
 
   .forms {
@@ -15,10 +15,8 @@
     @include form-dis;
     width: 400px;
     height: 500px;
-    margin-right: 15px;
     border-radius: 15px;
     padding-top: 20px;
-    margin-bottom: 20px;
   }
 
   .form-hero{
@@ -36,12 +34,8 @@
 
   .show-heroes{
     width: 600px;
-    min-height: 350px;
+    min-height: 500px;
     border-radius: 15px;
     @include form-dis
   }
-
 }
-
-
-

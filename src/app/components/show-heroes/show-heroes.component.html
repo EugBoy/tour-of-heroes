@@ -2,7 +2,7 @@
   <div class="dx-fieldset">
     <div class="level-filter">
       <div class="dx-field">
-        <div class="dx-field-label filters-label" >
+        <div class="dx-field-label filters-label">
           Уровень
         </div>
       </div>
@@ -15,8 +15,7 @@
             <dx-text-box [showClearButton]="true"
                          [formControl]="levelDownControl"
                          [isValid]="levelDownControl.valid"
-                         width="80px"
-            ></dx-text-box>
+                         width="80px"/>
           </div>
         </div>
         <div class="dx-field filter">
@@ -27,8 +26,7 @@
             <dx-text-box [showClearButton]="true"
                          [formControl]="levelUpControl"
                          [isValid]="levelUpControl.valid"
-                         width="80px"
-            ></dx-text-box>
+                         width="80px"/>
           </div>
         </div>
       </div>
@@ -41,8 +39,7 @@
         <dx-tag-box [dataSource]="skills$ | async"
                     [formControl]="skillsControl"
                     valueExpr="name"
-                    displayExpr="name"
-        ></dx-tag-box>
+                    displayExpr="name"/>
       </div>
     </div>
     <div class="dx-field">
@@ -50,35 +47,33 @@
         Поиск по имени:
       </div>
       <div class="dx-field-value">
-        <dx-text-box [inputAttr]="{ 'aria-label': 'Name' }"
-                     [showClearButton]="true"
-                     [formControl]="nameControl"
-        ></dx-text-box>
+        <dx-text-box [showClearButton]="true"
+                     [formControl]="nameControl"/>
       </div>
     </div>
-    <div class="dx-field dx-field-sort">
+    <div (click)="sortHeroes()"
+         class="dx-field dx-field-sort">
       <div style="width: 600px"
-           (click)="sortHeroes()"
            class="dx-field-label">
-        Сортировка по возрастанию уровня:
+        Сортировка по уровню:
       </div>
       <div class="sort-box">
-        <img [ngClass]="{ 'no-sort': (sortStatus % 3 == 0), 'up-sort': (sortStatus % 3 == 1), 'down-sort': (sortStatus % 3 == 2)}"
+        <img [ngClass]="{'no-sort': (sortStatus === LSort.NONE), 'up-sort': (sortStatus === LSort.ASCENDING), 'down-sort': (sortStatus === LSort.DESCENDING)}"
              ngSrc="../../../assets/img/arrow.png"
              height="20"
-             width="20"
-             alt="">
+             width="20">
       </div>
     </div>
   </div>
 </div>
-<dx-accordion [dataSource]="heroes$ | async | filterHeroes: sortStatus : this.levelDownControl.value! : this.levelUpControl.value! : this.nameControl.value! : this.skillsControl.value! "
+<dx-accordion [dataSource]="heroes$ | async | filterHeroes: sortStatus : levelDownControl.value : levelUpControl.value : nameControl.value : skillsControl.value"
               [collapsible]="true"
               itemTemplate="item"
               itemTitleTemplate="title"
-              noDataText="Нет данных с сервера, проверьте подключение"
+              noDataText="Нет героев."
               class="show-heroes">
-  <div  *dxTemplate="let hero of 'title'">
+  <div  *dxTemplate="let hero of 'title'"
+        class="accordion-item">
     <div class="hero-title">
       <div>
         {{ hero[LItem.NAME] }}
@@ -91,22 +86,24 @@
   <div *dxTemplate="let hero of 'item'"
        class="hero-info">
     <div class="hero-info-card">
-      <div>
-        {{ hero[LHero.POWER] }}
+      <div class="hero-info-card-power">
+        Сила: {{ hero[LHero.POWER] }}
       </div>
       <div class="skills">
-        <div *ngFor = 'let skill of hero[LHero.SKILLS]'>
+        <div class="skills-title">
+          Способности:
+        </div>
+        <div *ngFor="let skill of hero[LHero.SKILLS]"
+             class="skills-item">
           {{ skill }}
         </div>
       </div>
     </div>
     <dx-button (click)="openEditHeroPopup(hero)"
                text="Редактировать"
-               class="button-info"
-    ></dx-button>
+               class="button-info"/>
   </div>
 </dx-accordion>
 <app-popup *ngIf="isPopupVisible"
            [currentHero]="currentHero"
-           [(isPopupVisible)]="isPopupVisible"
-></app-popup>
+           [(isPopupVisible)]="isPopupVisible"/>

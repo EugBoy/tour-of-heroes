@@ -8,6 +8,12 @@
 
   .dx-field {
     display: flex;
+    .dx-field-label {
+      color: $color-white;
+      font-size: 15px;
+      font-weight: initial;
+      margin-bottom: 15px;
+    }
   }
 
   .form-new-skill{
@@ -15,15 +21,8 @@
     height: 130px;
   }
 
-  .dx-field-label {
-    margin-bottom: 15px;
-  }
-
   dx-button {
     @include input-area;
     margin-top: 20px;
   }
-
 }
-
-

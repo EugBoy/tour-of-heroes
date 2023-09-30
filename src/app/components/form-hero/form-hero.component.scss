@@ -4,16 +4,18 @@
 
   .dx-field {
     display: flex;
+
+    .dx-field-label {
+      color: $color-white;
+      font-size: 15px;
+      font-weight: initial;
+    }
   }
 
   .form-new-hero{
     @include form;
     height: 300px;
-  }
-
-  .form-new-skill{
-    @include form;
-    height: 130px;
+    padding-top: 20px;
   }
 
   dx-text-box {
@@ -23,8 +25,4 @@
   dx-tag-box {
     @include input-area
   }
-
 }
-
-
-
