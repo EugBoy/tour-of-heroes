@@ -38,7 +38,7 @@ export class PopupComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.changeHeroForm.addControl(LItem.ID, this._formBuilder.control('', [Validators.required]));
+    this.changeHeroForm.addControl(LItem.ID, this._formBuilder.control(''));
     this.changeHeroForm.patchValue(this.currentHero)
   }
 
