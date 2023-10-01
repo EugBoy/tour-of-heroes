@@ -72,8 +72,7 @@
               itemTitleTemplate="title"
               noDataText="Нет героев."
               class="show-heroes">
-  <div  *dxTemplate="let hero of 'title'"
-        class="accordion-item">
+  <div  *dxTemplate="let hero of 'title'">
     <div class="hero-title">
       <div>
         {{ hero[LItem.NAME] }}

@@ -1,5 +1,9 @@
 @import "../../../../../../assets/styles/mixins";
 
+::ng-deep .dx-popup-wrapper  .dx-overlay-content   {
+  border-radius: 30px;
+}
+
 .dx-field{
   @include flex-row;
   margin-bottom: 15px;
@@ -21,4 +25,8 @@ dx-button{
   &:hover {
     background-color: $bg-color;
   }
+}
+
+.dx-popup-normal::ng-deep {
+  border-radius: 25px;
 }

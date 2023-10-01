@@ -37,9 +37,24 @@
     @include flex-row;
   }
 
+
+
   .show-heroes{
     margin-top: 30px;
+    border-radius: 15px;
+    min-height: 20px;
+    padding: 20px;
+    background-color: $bg-color;
+    color: $color-white;
+
+    ::ng-deep .dx-accordion-item{
+      border-radius: 15px;
+      margin-bottom: 5px;
+      background-color: $color-white;
+      color: $color-black;
+    }
   }
+
 
   .hero-title {
     @include flex-row;
