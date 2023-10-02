@@ -1,5 +1,5 @@
 export enum LHero {
-  POWER = 'power',
-  SKILLS = 'skills',
-  LEVEL = 'level',
+  POWER = "power",
+  SKILLS = "skills",
+  LEVEL = "level",
 }

@@ -1,24 +1,22 @@
 @import "../../../assets/styles/mixins";
 
-:host{
+:host {
+
+  .form-new-skill {
+    @include form;
+    height: 150px;
+  }
 
   dx-text-box {
     @include input-area;
   }
 
-  .dx-field {
-    display: flex;
-    .dx-field-label {
-      color: $color-white;
-      font-size: 15px;
-      font-weight: initial;
-      margin-bottom: 15px;
-    }
-  }
-
-  .form-new-skill{
-    @include form;
-    height: 130px;
+  .dx-field-label {
+    color: $color-white;
+    font-size: 15px;
+    font-weight: initial;
+    margin-bottom: 15px;
+    height: 30px;
   }
 
   dx-button {

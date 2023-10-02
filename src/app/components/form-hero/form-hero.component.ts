@@ -19,7 +19,9 @@ export class FormHeroComponent {
 
   public skills$: Observable<IItem[]> = this._appService.skills$;
 
-  constructor (
+  public LItem: typeof LItem = LItem;
+
+  constructor(
     private readonly _appService: AppService,
     private readonly _heroFormBuilderService: HeroFormBuilderService,
   ) {
@@ -28,13 +30,12 @@ export class FormHeroComponent {
   /**
    * Метод добавления нового героя*
    */
-  public addHero(){
-    let hero: IHero = this.heroForm.getRawValue();
-    if (this.heroForm.valid){
+  public addHero(): void {
+    const hero: IHero = this.heroForm.getRawValue();
+    if (this.heroForm.valid) {
       this._appService.addHero(hero);
       this.heroForm.reset();
-    }
-    else {
+    } else {
       alert('При заполнении формы допущена ошибка!');
     }
   };
@@ -54,4 +55,5 @@ export class FormHeroComponent {
   public get levelControl(): FormControl {
     return this.heroForm.get([LHero.LEVEL]) as FormControl;
   };
+
 }

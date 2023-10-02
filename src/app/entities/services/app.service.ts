@@ -16,7 +16,7 @@ export class AppService {
   private _skills$$: BehaviorSubject<IItem[]> = new BehaviorSubject<IItem[]>([{id: 1, name: 'speed'}]);
   public skills$: Observable<IItem[]> = this._skills$$.asObservable();
 
-  constructor (
+  constructor(
     private readonly http: HttpClient
   ) {
   }
@@ -43,8 +43,8 @@ export class AppService {
    */
   public addHero(hero: IHero): void {
     lastValueFrom(this.http.post<IHero>('http://127.0.0.1:3000/items', hero))
-      .then( () => this.getHeroes())
-      .catch(() => alert('Нет связи с сервером'))
+      .then(() => this.getHeroes())
+      .catch(() => alert('Нет связи с сервером'));
   };
 
   /**

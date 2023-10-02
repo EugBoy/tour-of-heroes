@@ -7,14 +7,13 @@ import {LItem} from "../../entities/labels/item.label";
 import {IHero} from "../../entities/interfaces/hero.interface";
 import {IItem} from "../../entities/interfaces/item.interface";
 import {HeroesFilterFormBuilderService} from "./entities/services/heroes-filter-form-builder.service";
-import {LSort} from "./entities/enums/sort.enum";
+import {ESort} from "./entities/enums/sort.enum";
 
 @Component({
   selector: 'app-show-heroes',
   templateUrl: './show-heroes.component.html',
   styleUrls: ['./show-heroes.component.scss']
 })
-
 export class ShowHeroesComponent implements OnInit {
 
   public heroesFilterForm: FormGroup = this._heroesFilterFormService.filterForm;
@@ -24,15 +23,14 @@ export class ShowHeroesComponent implements OnInit {
 
   public currentHero: IHero = <IHero>{};
   public isPopupVisible: boolean = false;
-  public sortStatus: LSort = LSort.NONE;
+  public sortStatus: ESort = ESort.NONE;
 
   public LHero: typeof LHero = LHero;
   public LItem: typeof LItem = LItem;
-  public LSort: typeof LSort = LSort;
+  public LSort: typeof ESort = ESort;
 
-
-  constructor (
-    private readonly _appService : AppService,
+  constructor(
+    private readonly _appService: AppService,
     private readonly _heroesFilterFormService: HeroesFilterFormBuilderService,
   ) {
   }
@@ -44,7 +42,7 @@ export class ShowHeroesComponent implements OnInit {
   /**
    * Метод открытия popup.
    *
-   * @param hero {IHero} - герой, данные которого нужно отредактировать
+   * @param {IHero} hero  - герой, данные которого нужно отредактировать
    */
   public openEditHeroPopup(hero: IHero): void {
     this.currentHero = hero;
@@ -52,7 +50,7 @@ export class ShowHeroesComponent implements OnInit {
   };
 
   /**
-   * Метод меняет вид сортировки (нет, по возрастанию, по убыванию)
+   * Метод меняет вид сортировки (нет сортировки, по возрастанию, по убыванию)
    */
   public sortHeroes(): void {
     this.sortStatus = (this.sortStatus + 1) % 3;

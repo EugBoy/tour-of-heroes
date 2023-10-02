@@ -2,7 +2,7 @@
 
 :host {
 
-  .filters{
+  .filters {
     display: flex;
     flex-direction: row;
     width: 340px;
@@ -13,17 +13,17 @@
     margin-right: 124px;
   }
 
-  .level-filter{
+  .level-filter {
     display: flex;
   }
 
-  .filter-label{
+  .filter-label {
     width: 100px;
     height: 30px;
     margin-right: -7px;
   }
 
-  .dx-field{
+  .dx-field {
     @include flex-row;
 
     .dx-field-label {
@@ -33,11 +33,11 @@
     }
   }
 
-  .filter{
+  .filter {
     @include flex-row;
   }
 
-  .show-heroes{
+  .show-heroes {
     margin-top: 30px;
     border-radius: 15px;
     min-height: 20px;
@@ -45,7 +45,7 @@
     background-color: $bg-color;
     color: $color-white;
 
-    ::ng-deep .dx-accordion-item{
+    ::ng-deep .dx-accordion-item {
       border-radius: 15px;
       margin-bottom: 5px;
       background-color: $color-white;
@@ -82,12 +82,12 @@
     }
   }
 
-  .hero-info{
+  .hero-info {
     display: flex;
     justify-content: space-between;
     min-height: 40px;
 
-    dx-button{
+    dx-button {
       width: 150px;
       height: 40px;
       background-color: $bg-button-color;
@@ -95,7 +95,7 @@
     }
   }
 
-  .hero-info-card{
+  .hero-info-card {
     display: flex;
     flex-direction: column;
 
@@ -104,11 +104,11 @@
     }
   }
 
-  dx-tag-box{
+  dx-tag-box {
     @include input-area
   }
 
-  dx-text-box{
+  dx-text-box {
     @include input-area
   }
 
