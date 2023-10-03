@@ -47,7 +47,7 @@ export class FilterHeroesPipe implements PipeTransform {
     }
     if (name) {
       heroes = heroes.filter((hero: IHero): boolean => {
-        return hero[LItem.NAME].includes(name);
+        return hero[LItem.NAME].toLowerCase().includes(name.toLowerCase());
       });
     }
     if (skills) {
