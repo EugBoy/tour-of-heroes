@@ -23,11 +23,11 @@ export class FilterHeroesPipe implements PipeTransform {
    * @param {number} levelDown - нижний уровень, от которого идёт сортировка
    * @param {number} levelUp - верхний уровень, до которого идёт сортировка
    * @param {string} name - сортировка по имени
-   * @param {IHero[LHero.SKILLS]} skills - сортировка по наличию способностей в персонаже
+   * @param {string[]} skills - сортировка по наличию способностей в персонаже
    * @return {IHero[]}
    * @example [{Name: 'Ivan', level: 100}, {Name: 'Vladimir', level: 1}] --( sort = ESort.DESCENDING )--> [{Name: 'Vladimir', level: 1},{Name: 'Ivan', level: 100}]
    */
-  transform(heroes: IHero[] | null, sort: ESort, levelDown: number, levelUp: number, name: string, skills: LItem.NAME[]): IHero[] {
+  transform(heroes: IHero[] | null, sort: ESort, levelDown: number, levelUp: number, name: string, skills: string[]): IHero[] {
     if (sort === ESort.ASCENDING) {
       heroes = heroes!.sort((hero1: IHero, hero2: IHero) => {
         return hero1[LHero.LEVEL] - hero2[LHero.LEVEL];
