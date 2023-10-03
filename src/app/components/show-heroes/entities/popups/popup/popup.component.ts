@@ -30,7 +30,7 @@ export class PopupComponent implements OnInit {
   public LItem: typeof LItem = LItem;
 
   constructor(
-    private readonly _appService : AppService,
+    private readonly _appService: AppService,
     private readonly _heroFormBuilderService: HeroFormBuilderService,
     private readonly _formBuilder: FormBuilder,
   ) {
@@ -46,8 +46,8 @@ export class PopupComponent implements OnInit {
    *
    * @param {[LItem.ID]} id - id изменяемого героя
    */
-  public changeHero(id: number): void{
-    const changedHero: IHero = {... this.changeHeroForm.getRawValue(), [LItem.ID]:id};
+  public changeHero(id: number): void {
+    const changedHero: IHero = {...this.changeHeroForm.getRawValue(), [LItem.ID]: id};
     if (this.changeHeroForm.valid){
       this._appService.changeHero(changedHero);
       this.close();
@@ -78,4 +78,6 @@ export class PopupComponent implements OnInit {
   public get levelControl(): FormControl {
     return this.changeHeroForm.get([LHero.LEVEL]) as FormControl;
   };
+
+  protected readonly String = String;
 }

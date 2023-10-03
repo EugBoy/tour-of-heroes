@@ -55,7 +55,7 @@ export class AppService {
   public changeHero(changedHero: IHero): void {
     lastValueFrom(this.http.put('http://127.0.0.1:3000/items/' + changedHero[LItem.ID], changedHero))
       .then(() => this.getHeroes())
-      .catch(() => alert('Нет связи с сервером'))
+      .catch(() => alert('Нет связи с сервером'));
   };
 
   /**

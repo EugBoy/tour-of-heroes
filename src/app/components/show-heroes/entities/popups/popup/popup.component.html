@@ -12,7 +12,7 @@
       <dx-text-box [formControl]="nameControl"
                    [isValid]="!(nameControl.invalid && (nameControl.dirty || nameControl.touched))"
                    [showClearButton]="true"
-                   text="{{ currentHero[LItem.NAME] }}"/>
+                   [text]="currentHero[LItem.NAME]"/>
     </div>
   </div>
   <div class="dx-field">
@@ -23,7 +23,7 @@
       <dx-text-box [formControl]="powerControl"
                    [isValid]="!(powerControl.invalid && (powerControl.dirty || powerControl.touched))"
                    [showClearButton]="true"
-                   text="{{ currentHero[LHero.POWER] }}"/>
+                   [text]="String(currentHero[LHero.POWER])"/>
     </div>
   </div>
   <div class="dx-field">
@@ -48,7 +48,7 @@
       <dx-text-box [formControl]="levelControl"
                    [isValid]="!(levelControl.invalid && (levelControl.dirty || levelControl.touched))"
                    [showClearButton]="true"
-                   text="{{ currentHero[LHero.LEVEL] }}"/>
+                   [text]="String(currentHero[LHero.LEVEL])"/>
     </div>
   </div>
   <dx-button (click)="changeHero(currentHero[LItem.ID]!)"
