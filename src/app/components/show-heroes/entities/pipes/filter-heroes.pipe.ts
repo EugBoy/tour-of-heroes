@@ -1,7 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
 import {IHero} from "../../../../entities/interfaces/hero.interface";
 import {LHero} from "../../../../entities/labels/hero.label";
-import {HeroesFilterFormBuilderService} from "../services/heroes-filter-form-builder.service";
 import {LItem} from "../../../../entities/labels/item.label";
 import {ESort} from "../enums/sort.enum";
 
@@ -10,22 +9,17 @@ import {ESort} from "../enums/sort.enum";
 })
 export class FilterHeroesPipe implements PipeTransform {
 
-  constructor(
-    private readonly _heroesFilterFormBuilderService: HeroesFilterFormBuilderService
-  ) {
-  }
-
   /**
    * Метод делает фильтрацию и сортировку данных о героях.
    *
-   * @param {IHero[]} heroes - все герои
+   * @param {IHero[] | null} heroes - все герои
    * @param {ESort} sort - статус сортировки (Сортировка или не сортировка)
    * @param {number} levelDown - нижний уровень, от которого идёт сортировка
    * @param {number} levelUp - верхний уровень, до которого идёт сортировка
    * @param {string} name - сортировка по имени
    * @param {string[]} skills - сортировка по наличию способностей в персонаже
    * @return {IHero[]}
-   * @example [{Name: 'Ivan', level: 100}, {Name: 'Vladimir', level: 1}] --( sort = ESort.DESCENDING )--> [{Name: 'Vladimir', level: 1},{Name: 'Ivan', level: 100}]
+   * @example [{Name: 'Ivan', level: 100}, {Name: 'Vladimir', level: 1}] --( sort = ESort.ASCENDING )--> [{Name: 'Vladimir', level: 1},{Name: 'Ivan', level: 100}]
    */
   transform(heroes: IHero[] | null, sort: ESort, levelDown: number, levelUp: number, name: string, skills: string[]): IHero[] {
     if (sort === ESort.ASCENDING) {

@@ -39,7 +39,7 @@ export class PopupComponent implements OnInit {
   public ngOnInit(): void {
     this.changeHeroForm.addControl(LItem.ID, this._formBuilder.control(''));
     this.changeHeroForm.patchValue(this.currentHero)
-  }
+  };
 
   /**
    * Метод изменения данных о героя
@@ -78,6 +78,4 @@ export class PopupComponent implements OnInit {
   public get levelControl(): FormControl {
     return this.changeHeroForm.get([LHero.LEVEL]) as FormControl;
   };
-
-  protected readonly String = String;
 }

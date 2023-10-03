@@ -55,5 +55,4 @@ export class FormHeroComponent {
   public get levelControl(): FormControl {
     return this.heroForm.get([LHero.LEVEL]) as FormControl;
   };
-
 }

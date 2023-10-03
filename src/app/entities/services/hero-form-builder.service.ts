@@ -9,7 +9,8 @@ import {LHero} from "../labels/hero.label";
 export class HeroFormBuilderService {
 
   constructor(
-    private readonly _formBuilder: FormBuilder,) {
+    private readonly _formBuilder: FormBuilder,
+  ) {
   }
 
   /**

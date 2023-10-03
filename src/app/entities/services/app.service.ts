@@ -13,11 +13,11 @@ export class AppService {
   private _heroes$$: BehaviorSubject<IHero[]> = new BehaviorSubject<IHero[]>([]);
   public heroes$: Observable<IHero[]> = this._heroes$$.asObservable();
 
-  private _skills$$: BehaviorSubject<IItem[]> = new BehaviorSubject<IItem[]>([{id: 1, name: 'speed'}]);
+  private _skills$$: BehaviorSubject<IItem[]> = new BehaviorSubject<IItem[]>([{[LItem.ID]: 1, [LItem.NAME]: 'speed'}]);
   public skills$: Observable<IItem[]> = this._skills$$.asObservable();
 
   constructor(
-    private readonly http: HttpClient
+    private readonly http: HttpClient,
   ) {
   }
 

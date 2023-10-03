@@ -6,7 +6,7 @@ import {
   DxPopupModule,
   DxTagBoxModule,
   DxTextBoxModule,
-  DxValidatorModule
+  DxValidatorModule,
 } from "devextreme-angular";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
@@ -40,7 +40,7 @@ import {NgOptimizedImage} from "@angular/common";
     HttpClientModule,
     DxPopupModule,
     FormsModule,
-    NgOptimizedImage
+    NgOptimizedImage,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -23,7 +23,7 @@
       <dx-text-box [formControl]="powerControl"
                    [isValid]="!(powerControl.invalid && (powerControl.dirty || powerControl.touched))"
                    [showClearButton]="true"
-                   [text]="String(currentHero[LHero.POWER])"/>
+                   [text]="currentHero[LHero.POWER].toString()"/>
     </div>
   </div>
   <div class="dx-field">
@@ -48,7 +48,7 @@
       <dx-text-box [formControl]="levelControl"
                    [isValid]="!(levelControl.invalid && (levelControl.dirty || levelControl.touched))"
                    [showClearButton]="true"
-                   [text]="String(currentHero[LHero.LEVEL])"/>
+                   [text]="currentHero[LHero.LEVEL].toString()"/>
     </div>
   </div>
   <dx-button (click)="changeHero(currentHero[LItem.ID]!)"

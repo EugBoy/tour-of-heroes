@@ -8,5 +8,5 @@
 export enum ESort {
   NONE = 0,
   ASCENDING,
-  DESCENDING
+  DESCENDING,
 }
