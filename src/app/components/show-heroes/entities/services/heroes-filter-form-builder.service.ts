@@ -6,20 +6,20 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class HeroesFilterFormBuilderService {
 
-  constructor (
-    private readonly _formBuilder: FormBuilder
+  constructor(
+    private readonly _formBuilder: FormBuilder,
   ) {
   }
 
   /**
    * Метод создания формы для фильтрации
    */
-  public get filterForm(): FormGroup{
+  public get filterForm(): FormGroup {
     return this._formBuilder.group({
       levelDown: ['', [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      levelUp: ['',Validators.pattern(/^-?(0|[1-9]\d*)?$/)],
+      levelUp: ['', Validators.pattern(/^-?(0|[1-9]\d*)?$/)],
       skills: [''],
       name: [''],
-    })
-  }
+    });
+  };
 }

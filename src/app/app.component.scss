@@ -2,13 +2,13 @@
 
 :host {
 
-  .app{
-    display: flex;
+  .app {
     max-width: 1200px;
     min-height: 400px;
+    display: flex;
     flex-wrap: wrap;
-    gap: 20px;
     justify-content: center;
+    gap: 20px;
   }
 
   .forms {
@@ -20,23 +20,23 @@
     padding-top: 20px;
   }
 
-  .form-hero{
+  .form-hero {
+    @include df;
     width: 400px;
     height: 350px;
-    @include df;
   }
 
-  .form-skill{
-    width: 400px;
-    height: 100px;
+  .form-skill {
     @include df;
+    width: 400px;
+    height: 150px;
     justify-content: space-between;
   }
 
-  .show-heroes{
+  .show-heroes {
+    @include form-dis;
     width: 600px;
     min-height: 500px;
     border-radius: 15px;
-    @include form-dis
   }
 }

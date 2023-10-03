@@ -1,13 +1,12 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Observable} from "rxjs";
 import {IItem} from "../../../../../entities/interfaces/item.interface";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {AppService} from "../../../../../entities/services/app.service";
 import {IHero} from "../../../../../entities/interfaces/hero.interface";
 import {LItem} from "../../../../../entities/labels/item.label";
 import {LHero} from "../../../../../entities/labels/hero.label";
 import {HeroFormBuilderService} from "../../../../../entities/services/hero-form-builder.service";
-
 @Component({
   selector: 'app-popup',
   templateUrl: './popup.component.html',
@@ -31,7 +30,7 @@ export class PopupComponent implements OnInit {
   public LItem: typeof LItem = LItem;
 
   constructor(
-    private readonly _appService : AppService,
+    private readonly _appService: AppService,
     private readonly _heroFormBuilderService: HeroFormBuilderService,
     private readonly _formBuilder: FormBuilder,
   ) {
@@ -40,15 +39,15 @@ export class PopupComponent implements OnInit {
   public ngOnInit(): void {
     this.changeHeroForm.addControl(LItem.ID, this._formBuilder.control(''));
     this.changeHeroForm.patchValue(this.currentHero)
-  }
+  };
 
   /**
    * Метод изменения данных о героя
    *
    * @param {[LItem.ID]} id - id изменяемого героя
    */
-  public changeHero(id: number): void{
-    const changedHero: IHero = {... this.changeHeroForm.getRawValue(), [LItem.ID]:id};
+  public changeHero(id: number): void {
+    const changedHero: IHero = {...this.changeHeroForm.getRawValue(), [LItem.ID]: id};
     if (this.changeHeroForm.valid){
       this._appService.changeHero(changedHero);
       this.close();

@@ -10,7 +10,7 @@ import {IItem} from "./item.interface";
  * @extends IItem
  */
 export interface IHero extends IItem {
-  [LHero.POWER] : number;
-  [LHero.SKILLS] : string[];
-  [LHero.LEVEL] : number;
+  [LHero.POWER]: number;
+  [LHero.SKILLS]: string[];
+  [LHero.LEVEL]: number;
 }

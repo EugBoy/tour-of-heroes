@@ -13,11 +13,11 @@ export class AppService {
   private _heroes$$: BehaviorSubject<IHero[]> = new BehaviorSubject<IHero[]>([]);
   public heroes$: Observable<IHero[]> = this._heroes$$.asObservable();
 
-  private _skills$$: BehaviorSubject<IItem[]> = new BehaviorSubject<IItem[]>([{id: 1, name: 'speed'}]);
+  private _skills$$: BehaviorSubject<IItem[]> = new BehaviorSubject<IItem[]>([{[LItem.ID]: 1, [LItem.NAME]: 'speed'}]);
   public skills$: Observable<IItem[]> = this._skills$$.asObservable();
 
-  constructor (
-    private readonly http: HttpClient
+  constructor(
+    private readonly http: HttpClient,
   ) {
   }
 
@@ -43,8 +43,8 @@ export class AppService {
    */
   public addHero(hero: IHero): void {
     lastValueFrom(this.http.post<IHero>('http://127.0.0.1:3000/items', hero))
-      .then( () => this.getHeroes())
-      .catch(() => alert('Нет связи с сервером'))
+      .then(() => this.getHeroes())
+      .catch(() => alert('Нет связи с сервером'));
   };
 
   /**
@@ -55,7 +55,7 @@ export class AppService {
   public changeHero(changedHero: IHero): void {
     lastValueFrom(this.http.put('http://127.0.0.1:3000/items/' + changedHero[LItem.ID], changedHero))
       .then(() => this.getHeroes())
-      .catch(() => alert('Нет связи с сервером'))
+      .catch(() => alert('Нет связи с сервером'));
   };
 
   /**
